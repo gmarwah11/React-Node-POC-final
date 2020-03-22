@@ -49,6 +49,30 @@ if(!isProduction){
       });
     });
 }
+//swagger
+
+//swagger documentation
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
+// Extended: https://swagger.io/specification/#infoObject
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: "IMS",
+      description: "IMS service",
+      contact: {
+        name: "Regask"
+      },
+    }
+  },
+  // ['.routes/*.js']
+  apis: ["./routes/*.js"]
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+/////////////////////////////////////////////////////////////////////////////
 app.listen(4000 || process.env.PORT,(err,data)=>{
    if(err){
        console.log('Error occured in Server Starting');
