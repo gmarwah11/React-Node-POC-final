@@ -11,6 +11,7 @@ app.use(express.static('public'))
 const errorHandler = require('errorhandler');
 //
 var mysql = require('mysql');
+require('./db/operation/users')
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
  
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const isProduction = process.env.NODE_ENV === 'production';
+
 
 //swagger documentation
 const swaggerJsDoc = require("swagger-jsdoc");
