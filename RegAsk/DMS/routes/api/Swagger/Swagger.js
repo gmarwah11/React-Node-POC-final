@@ -49,8 +49,8 @@ const app = express();
  *         in: formData
  *         type: integer
  *     responses:
- *       200:
- *         description: status
+ *       ..:
+ *         description: ..
  */
 
 
