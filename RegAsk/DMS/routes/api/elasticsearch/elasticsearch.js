@@ -10,8 +10,6 @@ var client = new elasticsearch.Client({
 
 let i = 0
 
-con.connect(function(err) {
-    if (err) throw err;
     //Select all customers and return the result object:
     con.query("SELECT * FROM Documents", function (err, result, fields) {
       if (err) throw err;
