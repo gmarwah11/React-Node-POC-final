@@ -17,10 +17,16 @@ const UserNotificationOperations = {
             user: 'regaskmvp@gmail.com',
             pass: 'regask$123'
         }
+        // var auth =
+        // {
+        //     user: 'jatin345anand@gmail.com',
+        //     pass: 'MarutiJatin#'
+        // }
          var transporter = nodeMailer.createTransport({
             service: 'gmail',
             auth: auth
         });
+        console.log('sent');
         const mailOptions = {
             from: 'Regask Super Admin', // sender address
             to: emailId, // list of receivers
@@ -49,5 +55,8 @@ const UserNotificationOperations = {
         
     }
 }
-// UserNotificationOperations.sendEmailNotificationofTempPass('jatin345anand@gmail.com', 'MarutiJatin#');
+// UserNotificationOperations.sendEmailNotificationofTempPass('regaskmvp@gmail.com', 'TEJatin#MP');
+// UserNotificationOperations.sendEmailNotificationofTempPass('jatin345anand@gmail.com', 'TEJatin#MP');
+// UserNotificationOperations.sendEmailNotificationofTempPass('javatomcat36@gmail.com', 'TEJatin#MP');
+
 module.exports = UserNotificationOperations;

@@ -2,6 +2,7 @@ const passport = require('passport');
 const router = require('express').Router();
 const auth = require('../auth');
 const MYSQLREGASKAADB = require('../../db/common/connection');
+const SQLDBPOOL = require('../../db/common/pool/connection');
 const USERSDBOPEARTIONS = require('../../db/operation/users');
 const USERAUTHOPERATIONS = require('../../models/auth/authOperation');
 const USERNOTIFICATIONOPERATIONS = require('../../models/notification/userNotificationOperation');
@@ -62,11 +63,11 @@ router.post('/add', auth.required, (req, res, next) => {
     let lname = req.body.user.lname;
     console.log('lname ', lname);
     let password = USERAUTHOPERATIONS.randomOrTempPasswordGenerate(10, 8);
-    console.log('PAssword ', password);
+    console.log('Password ', password);
     let hashCode = USERAUTHOPERATIONS.setPasswordHashnSalt(password).hash;
-    console.log('Hash code ', hashCode);
+    console.log('Hash code Main ', hashCode);
     let salt = (USERAUTHOPERATIONS.setPasswordHashnSalt(password).salt).toString();
-    console.log('Salt ', salt);
+    console.log('Salt Main ', salt);
 
     let roleId = req.body.user.roleId;
     console.log('Role ID ', roleId);
@@ -86,29 +87,31 @@ router.post('/add', auth.required, (req, res, next) => {
     console.log(this.SQLQuery);
     MYSQLREGASKAADB.query(this.SQLQuery, (err, result) => {
         if (err) {
-            return res.status(400).send({ message: 'Something went wrong. Please try again.' });
+            return res.status(400).json({ message: 'Something went wrong. Please try again.' });
         }
         console.log('Users Row Find!!', Object.entries(result[0])[0][1]);
         if (Object.entries(result[0])[0][1] > 0) {
             // console.log('id does not exist');
-            return res.status(400).send({ message: 'A user with the same email address already exists' });
+            return res.status(400).json({ message: 'A user with the same email address already exists' });
         }
         // console.log('id does exist');
-        USERSDBOPEARTIONS.CreateOrInsertUser(emaiId, fname, lname, hashCode, salt, '0000-00-00', roleId, company, country, countryCode, phoneNumber, industry, false);
+        USERSDBOPEARTIONS.CreateOrInsertUser(emaiId, fname, lname, hashCode, salt, '2020-01-01', roleId, company, country, countryCode, phoneNumber, industry, false);
         let OutputAddUserNotification = USERNOTIFICATIONOPERATIONS.sendEmailNotificationofTempPass(emaiId, password);
         console.log('Sign up Successfully ', OutputAddUserNotification);
         let OutputAddUserToken = USERAUTHOPERATIONS.toAuthJSON(email);
         OutputAddUserToken.message = 'Add user Successfully';
-        res.status(200).send(OutputAddUserToken);
+        res.status(200).json(OutputAddUserToken);
 
     });
 });
 router.post('/login', auth.optional, (req, res, next) => {
+    // console.log('In login ',req);
     const { body: { user } } = req;
+
     console.log('req in login', req.body);
 
     if (!user.emailId) {
-        return res.status(422).json({
+        return res.status(406).json({
             errors: {
                 message: 'Please enter your email address.',
             },
@@ -116,13 +119,12 @@ router.post('/login', auth.optional, (req, res, next) => {
     }
 
     if (!user.password) {
-        return res.status(422).json({
+        return res.status(406).json({
             errors: {
                 message: 'Please enter your password.',
             },
         });
-    }
-
+    }  
     let emaiId = req.body.user.emailId;
     console.log('Email ID ', emaiId);
     let password = req.body.user.password;
@@ -133,17 +135,17 @@ router.post('/login', auth.optional, (req, res, next) => {
         console.log(this.SQLQuery);
         MYSQLREGASKAADB.query(this.SQLQuery, (err, result) => {
             if (err) {
-                return res.status(400).send({ message: 'Something went wrong. Please try again.' });
+                return res.status(500).json({ message: 'Something went wrong. Please try again.' });
             }
-            console.log('Users Row Find!!', result[0]);
+            console.log('Users Row Find!!',);
             this.USEROBJ = result[0];
             if (!result[0] || !USERAUTHOPERATIONS.validatePassword(password, result[0].hashCode, result[0].salt)) {
-                return res.status(400).send({ message: 'The email or password you entered is incorrect. Please try again.' });
+                return res.status(406).json({ message: 'The email or password you entered is incorrect. Please try again.' });
             }
             let OutputAddUserToken = USERAUTHOPERATIONS.toAuthJSON(emaiId);
             OutputAddUserToken.message = "Your emailID and Temporary Password is Correct. Please create new Password";
             console.log('Log in Successfully ', OutputAddUserToken);
-            return res.status(301).send(OutputAddUserToken);
+            return res.status(200).json(OutputAddUserToken);
         });
     }
     else {
@@ -153,29 +155,29 @@ router.post('/login', auth.optional, (req, res, next) => {
         console.log(this.SQLQuery);
         MYSQLREGASKAADB.query(this.SQLQuery, (err, result) => {
             if (err) {
-                return res.status(400).send({ message: 'Something went wrong. Please try again.' });
+                return res.status(500).json({ message: 'Something went wrong. Please try again.' });
             }
             console.log('Users Row Find!!', result[0]);
             this.USEROBJ = result[0];
             if (!result[0] || !USERAUTHOPERATIONS.validatePassword(password, result[0].hashCode, result[0].salt)) {
-                return res.status(400).send({ message: 'The email or password you entered is incorrect. Please try again.' });
+                return res.status(501).json({ message: 'The email or password you entered is incorrect. Please try again.' });
             }
             let ActiveQuery = `UPDATE users SET lastLogin = '${date}',active = true WHERE emailId = '${emaiId}';`
             console.log('Final Login Query ',ActiveQuery);
             MYSQLREGASKAADB.query(ActiveQuery, (e, r) => {
                 if (err) {
-                    return res.status(400).send({ message: 'Something went wrong. Please try again.' });
+                    return res.status(500).json({ message: 'Something went wrong. Please try again.' });
                 }
                 let OutputAddUserToken = USERAUTHOPERATIONS.toAuthJSON(emaiId);
                 console.log('result ',r);   
                 if (r.changedRows == 0) {
-                    OutputAddUserToken.message = "Your emailID and Temporary Password is Correct. You can not redirect to HOME.";
+                    OutputAddUserToken.message = "Your emailID and Password is Correct. You can not redirect to HOME.";
                     console.log('Log in Successfully ', OutputAddUserToken);
-                    return res.status(301).send(OutputAddUserToken);
+                    return res.status(208).json(OutputAddUserToken);
                 }
                 OutputAddUserToken.message = "Your emailID and Updated Password is Correct. Please redirect to HOME.";
                 console.log('Log in Successfully ', OutputAddUserToken);
-                return res.status(301).send(OutputAddUserToken);
+                return res.status(200).json(OutputAddUserToken);
             });
 
         });

@@ -1,4 +1,4 @@
-const config = { 
+const config = {  
     host: 'localhost',
     user: 'root',
     password: '1234',

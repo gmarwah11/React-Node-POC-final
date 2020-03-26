@@ -30,7 +30,7 @@ const UserTableCRUD = {
         this.phoneNumber = phoneNumber;
         this.industry = industry; 
         this.active = active;
-        this.SQLQuery = `INSERT INTO Users(emailId,FirstName,LastName,hashCode,salt,lastLogin,roleId,company,country,phonePrefix,phoneNumber,industry,active) VALUES ("${this.emailId}","${this.fname}","${this.lname}","${this.hashCode}","${this.salt}","${this.lastLogin}",${this.roleId},"${this.company}","${this.country}","${this.phonePrefix}","${this.phoneNumber}","${this.industry}",${this.active})`;
+        this.SQLQuery = `INSERT INTO Users(emailId,FirstName,LastName,hashCode,salt,lastLogin,roleId,company,country,phonePrefix,phoneNumber,industry,active) VALUES ("${this.emailId}","${this.fname}","${this.lname}","${this.hashCode}","${this.salt}",'${this.lastLogin}',${this.roleId},"${this.company}","${this.country}","${this.phonePrefix}","${this.phoneNumber}","${this.industry}",${this.active})`;
         DB.query(this.SQLQuery, (err, result) => {
             if (err) throw err;
             console.log('Users Row inserted!!');

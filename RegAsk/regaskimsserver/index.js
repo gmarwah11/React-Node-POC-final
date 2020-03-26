@@ -23,7 +23,7 @@ app.use(session({secret:'regaskaaserver',cookie:{maxAge:60000},resave:false,save
 if(!isProduction){
     app.use(errorHandler());
 }
-// Mongoose configure
+// Mongoose configure 
 const MSQLAADB = require('./db/common/connection');
 const USERSCRUD = require('./db/operation/users');
 var FindUserObj;

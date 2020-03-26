@@ -23,13 +23,13 @@ const AUTHUSEROPERATION = {
         const expirationDate = new Date(today);
         expirationDate.setDate(today.getDate() + 60);
 
-        return jwt.sign({
+        return jwt.sign({ 
             email: email,
             exp: parseInt(expirationDate.getTime() / 1000, 10),
         }, 'secret');
     },
     toAuthJSON: function (email) {
-        return {
+        return { 
             email: email,
             token: this.generateJWT(email),
         };
