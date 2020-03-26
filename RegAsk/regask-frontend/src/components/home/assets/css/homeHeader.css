@@ -1,0 +1,64 @@
+#homeHeaderCon{ 
+    position: absolute;
+    width: 100%;
+    display: flex; 
+}
+
+#userIcon{
+    position: absolute;
+    top: 19%;
+    right: 2%; 
+    width: 43px;
+    height: 43px; 
+    opacity: 1;
+}
+body{
+    box-sizing: border-box;
+    margin: 0%;
+    padding: 0%;
+}
+#header{
+    position: relative;
+    border: 1px solid red;
+    width: 1920px;
+    height: 93.5px;
+    display: flex;
+}
+#h1{
+    width: 1043px;
+    height: 70px; 
+}
+#logo{
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    width: 186px;
+    height: 53px; 
+    opacity: 1;
+}
+#h2{
+    width: 877px;
+    height: 70px; 
+}
+
+#parrellogram{
+    right: 0%;
+    position: absolute;
+    width: 626px;
+    height: 70px;
+    opacity: 1;
+}
+#welcomeu{
+    position: absolute;
+    top: 12%;
+    width: 190px;
+    height: 27px;
+    right: 6%;
+    color: #FFFFFF;
+    font-size: 19px;
+    -ms-flex-line-pack: center;
+    align-content: left;
+    text-align: left;
+    font-family: Helvetica Neue;
+    opacity: 100%;
+}
