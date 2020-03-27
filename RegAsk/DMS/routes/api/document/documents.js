@@ -73,25 +73,19 @@ router.post('/upload', upload.single('documents'), (req, res, next) => {
 ///fetch
 router.get('/fetch/:fn', (req, res) => {
     const a = req.params.fn
-    console.log(a)
-    con.connect(function (err) {
-        if (err) throw err;
         con.query("SELECT * FROM Documents where id = ?", [a], function (err, result, fields) {
             if (err) throw err;
             res.send(result);
         });
     });
-})
+
 
 router.get('/list', (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
         con.query("SELECT * FROM Documents", function (err, result, fields) {
             if (err) throw err;
             res.send(result);
         });
     });
-})
 
 
 module.exports = router;
