@@ -27,7 +27,7 @@ class ChangePasswordUser extends Component {
         <div id="b">
           <img src={require('./assets/RegAskLogo/Group 1.png')} id="logo1" alt="" />
             <img src={require('./assets/Parallelorgam/Path 19@2x.png')} id="backParr" />
-            <img src={require('./assets/RegASK/mini.png')} id="reserv" alt="" />
+            <img src={require('./assets/©2020 RegASK. All rights reserved/mini.png')} id="reservCP" alt="" />
           
        <img src={require('./assets/changePassword/RectangleCP/Rectangle 2.png')} id="b1" alt="" />
         <img src={require('./assets/changePassword/Updatebutton/Group 37.png')} id="update" alt="" />
