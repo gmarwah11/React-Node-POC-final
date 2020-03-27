@@ -13,12 +13,14 @@ class UserMenu extends Component {
     }
     this.logout = this.logout.bind(this);
   }
+
   componentWillMount(){
     console.log(this.props);
     this.setState({
       username: this.props.username
     });
   }
+
   logout(){
     axios
     .post("/user/logout")

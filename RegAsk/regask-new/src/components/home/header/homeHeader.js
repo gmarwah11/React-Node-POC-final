@@ -17,9 +17,10 @@ class HomeHeader extends Component {
     componentWillMount(){
         console.log(this.props);
         this.setState({
-          username: this.props.username
+            username: this.props.username
         });
-      }
+    }
+    
     render() {
         return(
             <div id="homeHeaderCon"> 

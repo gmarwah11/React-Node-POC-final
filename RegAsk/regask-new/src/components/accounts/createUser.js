@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
+import sessionstorage from "sessionstorage";
 class CreateOrAddUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: 'Jatin'
+    }
+  }
+  componentDidMount() {
+    if(!sessionstorage.getItem("loggedIn")){
+      window.location = '/';
     }
   }
   onSubmit(e) {

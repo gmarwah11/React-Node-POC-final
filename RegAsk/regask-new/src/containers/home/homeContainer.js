@@ -19,6 +19,11 @@ class HomeContainer extends Component {
   componentWillMount(){
     console.log(this.props);
   }
+  componentDidMount() {
+    if(!sessionstorage.getItem("loggedIn")){
+      window.location = '/';
+    }
+  }
   render() {
     console.log('Props in Home',this.props);
     console.log('Type Home in render',this.username);

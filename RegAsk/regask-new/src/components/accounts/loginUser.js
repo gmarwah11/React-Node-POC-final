@@ -35,12 +35,18 @@ class Login extends Component {
           username: this.state.email,
           password: this.state.pass
         }).then(response => {
-          console.log("chandan doSignIn====>",response);
-          console.log("chandan doSignIn====>",response.data,response.config,response.headers);
+          //console.log("chandan doSignIn====>",response);
+          //console.log("chandan doSignIn====>",response.data,response.config,response.headers);
+          sessionstorage.setItem("userName", response.data.username);
+          sessionstorage.setItem("userId", response.data.userId);
+          sessionstorage.setItem("loggedIn", true);
           setTimeout(function(){
               window.location.reload();
           },100);
         }).catch(error => {
+          sessionstorage.setItem("userName", null);
+          sessionstorage.setItem("userId", null);
+          sessionstorage.setItem("loggedIn", false);
           this.setState({ showEMI: true,isSendLoginAPI:true });
           console.log(error);
           // return true;

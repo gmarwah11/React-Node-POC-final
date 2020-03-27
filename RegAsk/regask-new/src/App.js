@@ -34,13 +34,18 @@ class App extends Component {
       console.log("chandan====>",response);
       if (response.data.user) {
         // console.log("Get User: There is a user saved in the server session: ");
-
+        sessionstorage.setItem("userName", response.data.user.username);
+        sessionstorage.setItem("userId", response.data.user.userId);
+        sessionstorage.setItem("loggedIn", true);
         this.setState({
           loggedIn: true,
           username: response.data.user.username
         });
 		    this.props.location.pathname = "/home";
       } else {
+        sessionstorage.setItem("userName", null);
+        sessionstorage.setItem("userId", null);
+        sessionstorage.setItem("loggedIn", false);
         this.setState({
           loggedIn: false,
           username:'Super Admin'
@@ -55,7 +60,15 @@ class App extends Component {
     }
   }
   componentDidMount() {
-	this.getUser();
+    console.log("componentDidMount====>",!sessionstorage.getItem("loggedIn"), typeof(!sessionstorage.getItem("loggedIn")));
+    if(!sessionstorage.getItem("loggedIn")){
+      this.getUser();
+    }else{
+      this.setState({
+        loggedIn: true,
+        username: sessionstorage.getItem("userName")
+      });
+    }
     window.addEventListener("resize", this.resizeFunction);
   }
   componentDidUpdate(e) {
