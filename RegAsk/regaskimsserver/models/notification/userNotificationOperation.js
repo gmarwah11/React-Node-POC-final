@@ -5,23 +5,12 @@ const UserNotificationOperations = {
 
     sendEmailNotificationofTempPass: function (emailId,tempPassord) {
         console.log('email and password is ', emailId, tempPassord);
-        // var auth = {
-        //     type: 'oauth2',
-        //     user: 'jatin345anand@gmail.com',
-        //     clientId: '221886488437-ho69g5pdecvbkcd7b8k2kc17sntbpv42.apps.googleusercontent.com',
-        //     clientSecret: 'h-jbtZhWhZHNVDZ3agZ95KI9',
-        //     refreshToken: '1//043COHxT4m3YACgYIARAAGAQSNwF-L9IrQ7wmOq8q2ke6jhRaoY0iBJlgO1CrN6D61tV9HMDUWf6HDW_s0H0u9Rt4Yf-7U_iOnVY',
-        // }
+         
         var auth =
         {
             user: 'regaskmvp@gmail.com',
             pass: 'regask$123'
-        }
-        // var auth =
-        // {
-        //     user: 'jatin345anand@gmail.com',
-        //     pass: 'MarutiJatin#'
-        // }
+        } 
          var transporter = nodeMailer.createTransport({
             service: 'gmail',
             auth: auth
@@ -56,7 +45,6 @@ const UserNotificationOperations = {
     }
 }
 // UserNotificationOperations.sendEmailNotificationofTempPass('regaskmvp@gmail.com', 'TEJatin#MP');
-// UserNotificationOperations.sendEmailNotificationofTempPass('jatin345anand@gmail.com', 'TEJatin#MP');
-// UserNotificationOperations.sendEmailNotificationofTempPass('javatomcat36@gmail.com', 'TEJatin#MP');
+ 
 
 module.exports = UserNotificationOperations;
