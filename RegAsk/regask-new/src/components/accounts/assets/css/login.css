@@ -7,7 +7,7 @@
     height: 53px;
     opacity: 1;
 }
-#r{
+#r{ 
     top: 524px;
 left: 278px; 
 width: 31px;
@@ -17,13 +17,13 @@ opacity: 1;
 }
 #b{
  background-color: #FFFFFF;
- /* background-image: url('/Path 19@2x.png'); */
  width: 100%;
  height: 100%;  
 }
 #backParr{
-    width: 71%;
+    width: 70%;
     position: absolute;
+    height: 100%;
     right: 0%;
     left: 30%;
     top: 0%;
@@ -70,8 +70,8 @@ body{
 #signin{
     position: absolute;
     cursor: pointer;
-    top: 469px;
-    left: 668px;
+    top: 464px;
+    left: 661px; 
     width: 131px;
     height: 39px; 
     opacity: 1;

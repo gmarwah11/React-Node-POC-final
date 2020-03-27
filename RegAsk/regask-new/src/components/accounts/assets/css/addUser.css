@@ -1,4 +1,3 @@
-
 #logo1{
     position: absolute;
     top: 310px;
@@ -21,753 +20,167 @@ opacity: 1;
  height: 100%;  
 }
 #backParr{
-    width: 71%;
+    width: 70%;
     position: absolute;
+    height: 100%;
     right: 0%;
     left: 30%;
     top: 0%;
 }
-
-#reserv{
-    position: absolute;
-    top: 775px;
-    left: 1010px;
+#reservAddUser{
+    position: absolute; 
+    bottom: 2%; 
     width: 330px;
     height: 20px;
-opacity: 1;
+    opacity: 1;
+    right: 2%;
+    opacity: 1;
 }
-#b2{
-      background: #022B49 0% 0% no-repeat padding-box; 
-    width: 808px;
-    height: 0px;
-    border-bottom: 900px solid #022B49;
-    border-left: 137px solid transparent;
-    margin-left: 626px;
-    
-}
-
-
-__________________________________________________________________________________________________________________________________
-
-
-
-
-
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-
-body{
-
-  width: 100%;
-  height: 100%;
-  padding: 0%;
-  margin: 0%;
-  box-sizing: border-box;
-}
-#logo{
-  position: absolute;
-  top: 495px;
-left: 185px;
-width: 303px;
-height: 91px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/logo.svg') 0% 0% no-repeat padding-box;
-opacity: 1;
-}
-#r{
-  top: 524px;
-left: 278px;
-width: 31px;
-height: 36px;
-background: #002B49 0% 0% no-repeat padding-box;
-opacity: 1;
-}
-#bleft{
-  top: 0px;
-  left: 0px;
-  width: 1920px;
-  height: 1080px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-#bright{ 
-  position: absolute;
-  top: -0.4218902587890625px;
-  left: 626px;
-  width: 1294px;
-  height: 1080px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/changepasswordright.png') 0% 0% no-repeat padding-box;
-  box-shadow: 4px 4px 10px #00000029;
-  border-radius: 8px;
-  opacity:1}
-
-
-
-
-  #right{ 
+ 
+#b1addUser{ 
     position: absolute;
-    top: -0.4218902587890625px;
-    left: 300px;
-    width: 1294px;
-    height: 1080px;
-    opacity:1}
-
-
-
-
-#bcenter{
-
-  position: absolute;
-  top: 333px;
-  left: 601px;
-  width: 718px;
-  height: 414px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/changepasswordcenter.png') 0% 0% no-repeat padding-box;
-  box-shadow: 4px 4px 10px #00000029;
-  border-radius: 8px;
-  opacity: 1;
-  display: flex;
+    /* border: 1px solid blue; */
+    /* top: 20%; */
+    /* left: 30%; */
+    width: 100%;
+    height: 100%;
+    /* background-color: #555; */
+    /* background: #F8F8F8 0% 0% no-repeat padding-box; */
+    /* -webkit-box-shadow: 4px 4px 10px #00000029; */
+    -webkit-box-shadow: 1px #00000029;
+    box-shadow: 1px #00000029;
+    border-radius: 8px;
+    opacity: 1; 
 }
-#btable{
-  top: 0px;
-left: 0px;
-width: 1920px;
-height: 1080px;
-background: #FFFFFF 0% 0% no-repeat padding-box;
-opacity: 1;
-}
-
-
-
-#changepassword{
-  position: absoulte;
-  top: 372px;
-  left: 859px;
-  width: 203px;
-  height: 29px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/changepassword.svg') 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-
-
-
-
-
-#temppassword{
-
-  position: absoulte;
-  top: 453px;
-  left: 792px;
-  width: 338px;
-  height: 23px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/temppassword.svg') 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-
-
-
-#newpassword{
-  position: absoulte;
-  top: 521px;
-  left: 792px;
-  width: 338px;
-  height: 23px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/newpassword.svg') 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-
-
-#confirmpassword{
-  position: absoulte;
-  top: 589px;
-  left: 792px;
-  width: 338px;
-  height: 23px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/confirmpassword.svg') 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-
-
-#passwordcontent{
-  position: auto;
-  top: 589px;
-  left: 792px;
-  width: 338px;
-  height: 23px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/passwordcontent.svg') 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-
-#updatebutton{
-  position: auto;
-  top: 667px;
-  left: 895px;
-  width: 131px;
-  height: 39px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/updatebutton.svg') 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-
-
-
-.li{
-  list-style:square;
-  color:#022B49 ;
-}
-.input {
-  width: 250px;
-
-
-}
-
-#logincenter{
-
-  top: 343px;
-left: 601px;
-width: 718px;
-height: 394px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/logincenter.png') 0% 0% no-repeat padding-box;
-box-shadow: 4px 4px 10px #00000029;
-border-radius: 8px;
-opacity: 1;
-}
-
-
-
-#forgotpassword{
-  top: 586px;
-left: 1039px;
-width: 91px;
-height: 14px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/forgotpassword.svg') 0% 0% no-repeat padding-box;
-opacity: 1;
-}
-
-
-#username{
-  top: 481px;
-left: 821px;
-width: 174px;
-height: 18px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/username.svg') 0% 0% no-repeat padding-box;
-opacity: 1;
-}
-
-#password{
-
-
-
-
-
-top: 549px;
-left: 821px;
-width: 174px;
-height: 18px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/password.svg') 0% 0% no-repeat padding-box;
-opacity: 1;
-}
-
-
-
-#forgotpassword{
-  top: 586px;
-left: 1039px;
-width: 91px;
-height: 14px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/forgotpassword.svg') 0% 0% no-repeat padding-box;
-opacity: 1;
-}
-
-#passwordexist{
-  top: 628px;
-  left: 792px;
-  width: 321px;
-  height: 18px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/username.svg') 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-
-
-#signin{
-  top: 664px;
-left: 895px;
-width: 131px;
-height: 39px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/signin.svg') 0% 0% no-repeat padding-box;
-opacity: 1;
-}
-
-
-
-.input{
-
-    top: 664px;
-  left: 895px;
-  width: 150px;
-  height: 39px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/signin.svg') 0% 0% no-repeat padding-box;
-  opacity: 1;
-  }
-
-  #div {
-    border: 1px solid black;
-    background-color: lightblue;
-    padding-top: 50px;
-    padding-right: 30px;
-    padding-bottom: 50px;
-    padding-left: 80px;
-
-}
-
-#firstname{
-
-  top: 362px;
-  left: 742px;
-  width: 174px;
-  height: 18px;
-
-
-opacity: 1;
-
-
-
-
-}
-
-  #button1 {border-radius: 20px;
-
-
-
-    background-color:#34A098;; /* Green */
-    border: none;
-    color: white;
-    font-size: 14px;
-    top: 667px;
-  
-    left: 70%;
+#create{
+    cursor: pointer;
+    position: absolute;
+    bottom: 7%; 
     width: 131px;
     height: 39px;
- 
-    opacity: 0.4;
-  }
-#button2 {border-radius: 20px;
-  color:white;
-  margin-left: 128%;
-  width: 131px;
-  height: 39px;
-  top: 761px;
-
-  background-color:#34A098;; /* Green */}
-#button3 {border-radius: 8px;}
-#button4 {border-radius: 12px;}
-#button5 {border-radius: 50%;}
-
-
-
-
-
-
-
-
-
-
-
-
-
-#lastname{
-
-  top: 362px;
-left: 1006px;
-width: 174px;
-height: 18px;
-
-opacity: 1;
-
-}
-
-
-
-#email{
-  top: 430px;
-left: 742px;
-width: 174px;
-height: 18px;
-
-opacity: 1;
-}
-
-
-#role{
-  top: 430px;
-left: 1006px;
-width: 174px;
-height: 18px;
-
-opacity: 1;
- 
-
-
-}
-
-
-#companyname{
-  top: 498px;
-left: 742px;
-width: 174px;
-height: 18px;
-
-opacity:1
-}
-#phonenumber{
-  top: 579px;
-left: 742px;
-width: 174px;
-height: 18px;
-margin-top: 45px;
-margin-left: -65px;
-
-opacity: 1;
-}
-
-#ex{
-  top: 607px;
-left: 742px;
-width: 18px;
-height: 18px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/createaccount/ex.svg') 0% 0% no-repeat padding-box;
-opacity:1
-}
-#number{
-  top: 610px;
-left: 817px;
-width: 58px;
-height: 18px;
-
-opacity: 1;
-}
-
-
-#industry{
-
-top: 610px;
-left: 1006px;
-width: 174px;
-height: 18px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/createaccount/industry.svg') 0% 0% no-repeat padding-box;
-opacity: 1;
-}
-
-#mandatory{
-
-  margin-top: 48px;
-  margin-left: -57px;
-  top: 688px;
-  left: 734px;
-  width: 76px;
-  height: 16px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/createaccount/mandatory.svg') 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-
-
-#createbutton{
-  top: 761px;
-  left: 895px;
-  width: 131px;
-  height: 39px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/createaccount/createbutton.svg') 0% 0% no-repeat padding-box;
-  opacity: 0.4;
-
-}
-#usercenter{
-  position:absolute;
-top: 242px;
-left: 601px;
-width: 718px;
-height: 597px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/createaccount/usercenter.svg') 0% 0% no-repeat padding-box;
-box-shadow: 4px 4px 10px #00000029;
-border-radius: 8px;
-opacity: 1;}
-
-
-
-
-#location{
-  
-  top: 610px;
-  left: 1006px;
-  width: 174px;
-  height: 18px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/createaccount/location.svg') 0% 0% no-repeat padding-box;
-  opacity: 1;
-  }
-
-#createaccount{
-  margin-top: 10%;
-  left: 875px;
-  width: 164px;
-  height: 32px;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/createaccount/createaccount.svg') 0% 0% no-repeat padding-box;
-  color: #34A098;
-text-decoration: #34A098;
-
-  opacity: 0.4;
-}
-
-#phonenumber{
-  top: 579px;
-left: 742px;
-width: 110px;
-height: 18px;
-background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/createaccount/phonenumber.svg') 0% 0% no-repeat padding-box;
-opacity: 1;
-}
-
-
-
-
-
-#center{
-
-  position: absolute;
-  margin: center;
-  margin-top: 8%;
-  margin-left: 30%;
-  margin-right: 20%;
-  margin-bottom: 20%;
-  opacity: 1;
-}
-
-
-
-#docscenter{
-
-  position: absolute;
-  margin: center;
-  margin-top: 10%;
-  margin-left: 40%;
-  margin-right: 20%;
-  margin-bottom: 10%;
-  opacity: 1;
-}
-
-
-
-#docs{
-  position: absoulte;
-  top: 372px;
-  left: 859px;
-  width: 203px;
-  height: 29px;
- 
-  opacity: 1;
-}
-
-
-
-  #center{
-
-    position: absolute;
-    margin: center;
-    
     opacity: 1;
-    width:20%;
-  }
+    left: 40%;
+}
+#ca{
+    position: absolute;
+    top: 6%;
+    left: 38%;
+    width: auto;
+    height: 32px;
+    /* border: 1px solid red; */
+    /* background: transparent url(img/Forgot password.png) 0% 0% no-repeat padding-box; */
+    opacity: 1;
+}
 
-
-
-  
-  #bleft{
+#form{
+    position: absolute;
+    /* border: 1px solid blue; */
+    top: 15%;
+    bottom: 15%;
+    left: 25%;
+    right: 25%;
+    width: 50%;
+    height: 70%;
+    display: -ms-flexbox;
+    display: flex;
+}
+#leftT{
+    top: 4%;
+    left: 4%;
+    width: 50%;
+    /* border: 1px solid green; */
     position: relative;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    opacity: 1;
-  }
-  #bright{ 
+}
+#rightT{
+    top: 4%;
+    left: 4%;
+    width: 50%;
+    /* border: 1px solid green; */
     position: relative;
-    top: -0.4218902587890625px;
-    left: 626px;
-    width: 100%;
-    height: 100%;
-    background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/changepasswordright.png') 0% 0% no-repeat padding-box;
-    box-shadow: 4px 4px 10px #00000029;
-    border-radius: 8px;
-    opacity:1}
-  
-  
-
-
-
-  #center{
-
-    position: absolute;
-    margin: center;
+}
+.fnAU{
+    position: relative;
+    top: 10%;
+    left: 15%;
+    width: 195px;
+    height: 23px;
     
     opacity: 1;
-    width:20% }
-
-
-  #bcenter{
-
+}
+.eAU{
+    position: relative;
+    top: 15%;
+    left: 15%;
+    width: 195px;
+    height: 23px;
+    
+    opacity: 1; 
+}
+.cnAU{
+    position: relative;
+    top: 20%;
+    left: 15%;
+    width: 195px;
+    height: 23px;
+    
+    opacity: 1; 
+}
+#pnImg{
     position: absolute;
-    margin: center;
+    top: 56%;
+    left: 16%;
+    width: 92px;
+    height: 19px;
+    opacity: 1;
+}
+.exAU{
+    display: inline-block;
+    position: absolute;
+    top: 60%;
+    left: 15%;
+    width: 56px;
+    height: 22px;
+    opacity: 1;
+}.pnAU{
+    position: relative;
+    top: 29%;
+    left: 43%;
+    width: 127px;
+    height: 23px;
+    opacity: 1;
+
+}
+.lnAU{
+    position: relative;
+    top: 10%;
+    left: 9%;
+    width: 195px;
+    height: 23px;
     
     opacity: 1;
-    width:20%;
-  }
-
-
-  
-  #bleft{
-    top: 0px;
-    left: 0px;
-    width: 70%;
-    height: 1080px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
+}
+.roleAU{
+    position: relative;
+    top: 15%;
+    left: 9%;
+    width: 195px;
+    height: 23px;
+    
     opacity: 1;
-  }
-  #bright{ 
+}
+#locationAU{
     position: absolute;
-    top: -0.4218902587890625px;
-    left: 626px;
-    width: 70%;
-    height: 1080px;
-    background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/changepassword/changepasswordright.png') 0% 0% no-repeat padding-box;
-    box-shadow: 4px 4px 10px #00000029;
-    border-radius: 8px;
-    opacity:1}
-
-  
-
-  
-.textfield{
-  
-  margin-left: -75px;
-  margin-right: 176px;
-  margin-bottom: 2px;
-  margin-top: 14px;
-  border: none;
-  width: 175px;
-  border-bottom: 1px solid #34A098;
-  background: transparent url('C:/Regax/regaskreactfrontapp/src/assets/createaccount/star.svg') -0.5% 100%  no-repeat padding-box;
+    top: 40%;
+    left: 9%;
+    width: 195px;
+    height: 23px;
+    opacity: 1;
 }
-
-.textfield2{
-  margin-left: -71px;
-  border: none;
-  width: 50px;
-  border-bottom: 1px solid #34A098;
+#industryAU{
+    position: absolute;
+    top: 60%;
+    left: 9%;
+    width: 195px;
+    height: 23px;
+    opacity: 1;
 }
-
-
-.textfield3{
-  position: absolute;
-  margin-left: -15%;
-  top: 292px;
-  border: none;
-  width: 120px;
-  border-bottom: 1px solid #34A098;
-}
-
-#textfield4{
-  position: absolute;
-  margin-top: -2%;
- 
-}
-
-
-.select1{
-  width: 70px;
-  height: 5px;
-  border-bottom: 1px solid #34A098;
-}
-.select2{
- height:5px;
-width: 152px;
-border-bottom: 1px solid #34A098;
-}
-
-
-
-#table{
-  margin-top: -33px;
-  position: absolute;
-  top: 0px;
-  right: 12%;
-  width: 100px;
-  height: 900px;
-  background: transparent;
-  opacity: 1;
-}
-
-#phone{
-  top: 579px;
-}
-
-
-#containter{
-  width: 100%;
-  position: relative;
-}
-
-
-
-
-#select1{
-  margin: 8px;
-  min-width: 181px;
-  margin-left: -75px;
-  color: #34A098;
-}
-
-
-
-
-#select2{
- margin-top: 63px;
- color: #34A098;
-  min-width: 181px;
-  margin-left: -75px;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
