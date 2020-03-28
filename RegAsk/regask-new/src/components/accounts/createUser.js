@@ -135,7 +135,7 @@ class CreateOrAddUser extends Component {
             <div id="leftT">
               <TextField
                 class="fnAU"
-                label="First name"
+                label="* First name"
                 id="filled-search" type="search"
                 onChange={this.handleFirstname}
                 value={this.state.firstname}
@@ -143,7 +143,7 @@ class CreateOrAddUser extends Component {
               <br></br>
               <TextField
                 class="eAU"
-                label="Email"
+                label="* Email"
                 id="filled-search" type="search"
                 onChange={this.handleUserName}
                 value={this.state.username}
@@ -152,7 +152,7 @@ class CreateOrAddUser extends Component {
               <div className="errorDiv">{this.state.errorMsg}</div>
               <TextField
                 class="cnAU"
-                label="Company name"
+                label="* Company name"
                 id="filled-search" type="search"
                 onChange={this.handleCompany}
                 value={this.state.company}
@@ -180,7 +180,7 @@ class CreateOrAddUser extends Component {
             <div id="rightT">
             <TextField
                 class="lnAU"
-                label="Last name"
+                label="* Last name"
                 id="filled-search" type="text"
                 onChange={this.handleLastname}
                 value={this.state.lastname}
@@ -188,14 +188,14 @@ class CreateOrAddUser extends Component {
               <br></br>
               <TextField
                 class="roleAU"
-                label="Role"
+                label="* Role"
                 id="filled-search" type="text"
                 onChange={this.handleRole}
                 value={this.state.role}
               />
               <br></br>
             <FormControl id="locationAU"  >
-        <InputLabel id="demo-simple-select-label">Location</InputLabel>
+        <InputLabel id="demo-simple-select-label">* Location</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
