@@ -8,7 +8,8 @@ class RoleList extends Component {
     }
   }
   componentDidMount() {
-    if(!sessionstorage.getItem("loggedIn")){
+    var isloggedIn = sessionstorage.getItem("loggedIn");
+    if(!isloggedIn || isloggedIn == "false"){
       window.location = '/';
     }
   }

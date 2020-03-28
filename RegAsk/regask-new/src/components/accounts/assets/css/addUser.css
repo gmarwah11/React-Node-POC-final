@@ -55,11 +55,16 @@ opacity: 1;
 #create{
     cursor: pointer;
     position: absolute;
-    bottom: 7%; 
+    bottom: 7%;
     width: 131px;
     height: 39px;
     opacity: 1;
     left: 40%;
+    padding-top: 6px;
+    background: #34A098;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 20px;
 }
 #ca{
     position: absolute;
@@ -183,4 +188,16 @@ opacity: 1;
     width: 195px;
     height: 23px;
     opacity: 1;
+}
+.errorDiv{
+    position: absolute;
+    top: 164px;
+    left: 39px;
+    width: 321px;
+    height: 18px;
+    /* background: transparent url(img/Group 40.png) 0% 0% no-repeat padding-box; */
+    opacity: 1;
+    color: red;
+    font-weight: 400;
+    font-size: 12px;
 }

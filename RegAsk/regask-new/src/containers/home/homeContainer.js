@@ -13,15 +13,29 @@ class HomeContainer extends Component {
    
     this.state ={
       name:'',
-      username: props.username
+      username: props.username,
+      popupshow:false
     }
+    this.handlePopup = this.handlePopup.bind(this);
   }
   componentWillMount(){
     console.log(this.props);
   }
   componentDidMount() {
-    if(!sessionstorage.getItem("loggedIn")){
+    var isloggedIn = sessionstorage.getItem("loggedIn");
+    if(!isloggedIn || isloggedIn == "false"){
       window.location = '/';
+    }
+  }
+  handlePopup(){
+    if(this.state.popupshow){
+      this.setState({
+        popupshow:false
+      });
+    }else{
+      this.setState({
+        popupshow:true
+      });
     }
   }
   render() {
@@ -30,8 +44,19 @@ class HomeContainer extends Component {
     return (
       <div id="homeCon"  >
 
-      <HomeHeader username ={this.state.username}/>
-      <HomeUserMenu username ={this.state.username}/>
+      {/* <HomeHeader username ={this.state.username}/> */}
+      <div id="homeHeaderCon"> 
+                <div id="h1">
+                <img src={require('../../components/home/assets/header/Group 1/Group 1.png')} id="logo" alt=""/>
+            </div>
+            <div id="h2">
+                <img src={require('../../components/home/assets/header/Subtraction 2/Subtraction 2.png')}  id="parrellogram" alt="" srcset=""/>
+                <span id="welcomeu">Welcome {this.state.username}</span>
+                <img src={require('../../components/home/assets/header/UserIcon/Group 19.png')}  onClick={this.handlePopup} alt="" id="userIcon"/>
+            </div>
+      </div>
+      {this.state.popupshow ?  (<HomeUserMenu username ={this.state.username}/> ) : (<span></span>)}
+      {/* <HomeUserMenu username ={this.state.username}/> */}
       {/* <HomeUserList/> */}
        
       </div>

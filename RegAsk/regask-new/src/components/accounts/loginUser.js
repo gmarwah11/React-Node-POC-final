@@ -12,127 +12,93 @@ import { Button } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import AuthLandingOperation from '../../models/operations/rootLanding';
 import axios, { get, post } from 'axios';
+import sessionstorage from "sessionstorage";
 
 class Login extends Component {
 
   constructor(props) {
-
     super(props);
-    // this.classes = useStyles();
     this.state = {
-      name: 'Jatin',
-      showFP: true,
-      showEMI: false,
-      emailId: '',
-      password: '',
-      // afterSignIn:'changepassword',
-      afterSignIn: '',
-      isSendLoginAPI: false
-      // afterSignIn:'home/Maruti Anand'
-
-    }
-    this.afterSignInP = '';
+      email: '',
+      pass:'',
+      showEMI: '',
+      errorMsg:''
+    };
     this.doSignIn = this.doSignIn.bind(this);
     this.doFP = this.doFP.bind(this);
     this.takeEmail = this.takeEmail.bind(this);
     this.takePassword = this.takePassword.bind(this);
-  };
-  componentDidMount(){
-    //get
   }
+
   doSignIn() {
-    console.log('In signin', this.afterSignInP);
-    var email = this.state.emailId;
-    var pass = this.state.password;
-    console.log('State in SignIN', this.state);
-    var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    // if ((nS.emailId.includes('@') && nS.emailId.includes('.')) && ((nS.password.includes('TE') && nS.password.includes('MP')) || re.test(nS.password))) {
-      if ((email.includes('@') && email.includes('.')) && ((pass.includes('TE') && pass.includes('MP')) || re.test(pass))) {
-        console.log('Do login');
-      var newURLLogin = 'http://localhost:4000/api/account/login';
-      var newUserData = {
-        "user": {
-          "emailId": email,
-          "password": pass
+    this.setState({ errorMsg:"" });
+    console.log("====>");
+    var password = this.state.pass;
+    var reversePassword = password.split('').reverse().join('');
+    if(this.state.email == ""){
+      this.setState({ errorMsg:"The user did not fill the email address field" });
+    }else if(this.state.pass == ""){
+      this.setState({ errorMsg:"The user did not fill the password field" });
+    }else{
+      axios.post("/user/login", {
+        username: this.state.email,
+        password: this.state.pass
+      }).then(response => {
+        //console.log("chandan doSignIn====>",response);
+        //console.log("chandan doSignIn====>",response.data,response.config,response.headers);
+        sessionstorage.setItem("userName", response.data.username);
+        sessionstorage.setItem("userId", response.data.userId);
+        sessionstorage.setItem("loggedIn", true);
+        if(password.includes('TE') && password.includes('MP') && password.startsWith("TE") && reversePassword.startsWith("PM")){
+          setTimeout(function(){
+              window.location = '/changepassword';
+          },100);
+        }else{
+          setTimeout(function(){
+              window.location.reload();
+          },100);
         }
-      }; 
-        axios.post(
-          newURLLogin,
-          newUserData
-        ).then(response => {
-          console.log(response.status);
-          console.log(response);
-          
-            // this.changeRedirectStatus('home/'+response.data.email);
-            this.setState({ afterSignIn: 'home/'+response.data.data.FirstName,isSendLoginAPI:true });
-            this.afterSignInP = 'home/'+response.data.data.FirstName;
-            localStorage.clear();
-            localStorage.setItem('token',response.data.token);
-          // }
-          // return true;
-        }).catch(error => {
-          this.setState({ showEMI: true,isSendLoginAPI:true });
-          console.log(error);
-          // return true;
-        });
-      
-     
+      }).catch(error => {
+        sessionstorage.setItem("userName", null);
+        sessionstorage.setItem("userId", null);
+        sessionstorage.setItem("loggedIn", false);
+        this.setState({ showEMI: true,isSendLoginAPI:true,errorMsg:"Wrong email or password" });
+        console.log(error);
+        // return true;
+      });
     }
   }
+
   doFP() {
     console.log('In fp');
     AuthLandingOperation.type = 'changepassword';
   }
+
   takeEmail = (e) => {
-    this.setState({ emailId: e.target.value });
+    this.setState({ email: e.target.value });
   }
+
   takePassword = (e) => {
     // console.log(e.target.value);
-    this.setState({ password: e.target.value });
+    this.setState({ pass: e.target.value });
   }
   componentWillMount() {
 
     console.log('in component will update', this.state);
   }
-  componentWillReceiveProps(nP) {
-    console.log('Component will recieve props', nP);
-  }
-  shouldComponentUpdate(nP, nS) {
-    console.log(nP, nS);
-    console.log('in should component update', this.state);
-
-    return true;
-
-  }
+  
   changeRedirectStatus = (V) => {
     this.afterSignInP = V;
-    // this.props.afterSignInP = V;
-    //  this.setState({afterSignIn:V});
   }
-  componentWillUpdate = (nP, nS) => {
-    console.log('componentWillUpdate', nP, nS);
-    // this.setState({afterSignIn:nS.afterSignIn});
-    this.afterSignInP = nS.afterSignIn;
-    console.log('in W U', this.afterSignInP);
-  }
-  componentDidUpdate = (nP, nS) => {
-    console.log('componentDidUpdate', nP, nS);
-    console.log('in D U', this.afterSignInP);
-  }
-  // componentWillUnmount(){
-  //   console.log('componentWillUnmount');
-  // }
+  
   render = () => {
-    // if(this.state.afterSignIn.length==0){
-    //   this.state.showEMI=!this.state.showEMI;
-    // }
     console.log('in render', this.afterSignInP);
     console.log('in render state', this.state);
     return (
       <div id="b">
         <img src={require('./assets/RegAskLogo/Group 1.png')} id="logo1" alt="" />
         <img src={require('./assets/Parallelorgam/Path 19@2x.png')} id="backParr" />
-        <img src={require('./assets/©2020 RegASK. All rights reserved/mini.png')} id="reservLU" alt="" />
+        <img src={require('./assets/RegASK/mini.png')} id="reserv" alt="" />
 
 
 
@@ -140,11 +106,11 @@ class Login extends Component {
 
           <img src={require('./assets/login/RectangleLogin/Rectangle 2.png')} id="b1" alt="" />
 
-          <NavLink to={"/" + this.afterSignInP} className="nav-link-item"> <img src={require('./assets/login/SignInIcon/Group 2.png')} onClick={this.doSignIn} id="signin" alt="" />  </NavLink>
+          <div> <img src={require('./assets/login/SignInIcon/Group 2.png')} onClick={this.doSignIn} id="signin" alt="" />  </div>
           <NavLink to="/changepassword" type={Button} className="nav-link-item"> <img src={require('./assets/login/Forgot password/Forgot password.png')} onClick={this.doFP} style={{ display: this.state.showFP ? 'block' : 'none' }} id="fp" alt="" />   </NavLink>
 
-          <img src={require('./assets/login/EPIncorrect/Group 40.png')} id="empi" style={{ display: this.state.showEMI ? 'block' : 'none' }} alt="" />
-
+          {/* <img src={require('./assets/login/EPIncorrect/Group 40.png')} id="empi" style={{ display: this.state.showEMI ? 'block' : 'none' }} alt="" /> */}
+          <div className="errorDiv">{this.state.errorMsg}</div> 
 
           <br></br>
 

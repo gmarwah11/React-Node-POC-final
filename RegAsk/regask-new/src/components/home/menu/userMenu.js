@@ -12,6 +12,9 @@ class UserMenu extends Component {
         username: props.username
     }
     this.logout = this.logout.bind(this);
+    this.addUser = this.addUser.bind(this);
+    this.listUser = this.listUser.bind(this);
+    this.uploadDoc = this.uploadDoc.bind(this);
   }
 
   componentWillMount(){
@@ -21,19 +24,30 @@ class UserMenu extends Component {
     });
   }
 
+  addUser(){
+    window.location = '/adduser';
+  }
+
+  listUser(){
+    window.location = '/userlist';
+  }
+
+  uploadDoc(){
+    window.location = '/uploadDocument';
+  }
+
   logout(){
     axios
     .post("/user/logout")
     .then(response => {
       console.log(response.data);
       if (response.status === 200) {
-        //this.props.updateUser({
-        //  loggedIn: false,
-        //  username: null
-        //});
-    setTimeout(function(){
-    window.location = '/';
-    },100);
+        sessionstorage.setItem("userName", null);
+        sessionstorage.setItem("userId", null);
+        sessionstorage.setItem("loggedIn", false);
+        setTimeout(function(){
+          window.location = '/';
+        },100);
       }
     })
     .catch(error => {
@@ -46,19 +60,19 @@ class UserMenu extends Component {
       <div id="userMenuCon" className="App">
 
         <ul>
-          <li id="addUser">
+          <li id="addUser" onClick={this.addUser}>
 
             <span class="addUcontent">Add User</span>
 
             <img class="userOPic" src={require('../assets/menu/Group 33/Group 33.png')} alt="" />
           </li>
-          <li id="listUser">
+          <li id="listUser" onClick={this.listUser}>
             <span class="addUcontent">List User</span>
 
             <img class="userOPic" src={require('../assets/menu/Path 33/Path 33.png')} alt="" />
           </li>
-          <li id="listRole">
-            <span class="addUcontent">List Role</span>
+          <li id="uploadDoc" onClick={this.uploadDoc}>
+            <span class="addUcontent">Upload Document</span>
 
             <img class="userOPic" src={require('../assets/menu/Path 33/Path 33.png')} alt="" />
           </li>

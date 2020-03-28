@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { updateIfCurrentPlugin } = require('mongoose-update-if-current');
 const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 mongoose.promise = Promise;
@@ -9,9 +10,15 @@ const userSchema = new Schema({
     password: { type: String, unique: false, required: true },
     firstname: { type: String, unique: false, required: false },
     lastname: { type: String, unique: false, required: false },
+    ex: { type: String, unique: false, required: false },
     phone: { type: String, unique: false, required: false },
-    address: { type: String, unique: false, required: false }
+    location: { type: String, unique: false, required: false },
+    industry: { type: String, unique: false, required: false },
+    role: { type: String, unique: false, required: false },
+    company: { type: String, unique: false, required: false }
+
 });
+userSchema.plugin(updateIfCurrentPlugin);
 
 // Define schema methods
 userSchema.methods = {
@@ -35,6 +42,7 @@ userSchema.pre("save", function(next) {
         next();
     }
 });
+
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

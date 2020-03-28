@@ -13,6 +13,7 @@ import HomeUserMenu from '../components/home/menu/userMenu';
 import AccountUserLogin from '../components/accounts/loginUser';
 import AccountUserChangePassword from '../components/accounts/changePasswordUser';
 import AccountUserAdd from '../components/accounts/createUser';
+import uploadDocument from '../components/accounts/insertDocument';
 class Router extends Component {
   render() {
     return (
@@ -20,11 +21,13 @@ class Router extends Component {
        <Switch>
        <Route path="/" exact component={App} />
         {/* <Route path="/:type" exact render={(props) => (<AuthContainer {...props}  />)}  /> */}
+        <Route path="/home" exact component={HomeContainer} />
         <Route path="/login" exact component={AccountUserLogin} />
         <Route path="/changepassword" exact component={AccountUserChangePassword} />
         <Route path="/adduser" exact component={AccountUserAdd} />
         <Route path="/userlist" exact component={HomeUserList}/>
         <Route path="/rolelist" exact component={HomeRoleList}/>
+        <Route path="/uploadDocument" exact component={uploadDocument}/>
         <Route path="/usermenu" exact component={HomeUserMenu}/>
       </Switch>
       </div>

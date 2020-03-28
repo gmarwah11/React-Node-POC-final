@@ -5,6 +5,7 @@
 }
 
 #userIcon{
+    cursor: pointer;
     position: absolute;
     top: 19%;
     right: 2%; 

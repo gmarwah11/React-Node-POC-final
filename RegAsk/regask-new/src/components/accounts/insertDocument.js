@@ -5,6 +5,8 @@ import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import withStyles from "@material-ui/core/styles/withStyles";
+import PropTypes from "prop-types";
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -19,6 +21,8 @@ import Button from '@material-ui/core/Button';
 // import UploadPreview from 'material-ui-upload/UploadPreview';
 import './assets/insertDocument/star.svg';
 import './assets/css/insertDocument.css';
+import sessionstorage from "sessionstorage";
+import axios, { get, post } from 'axios';
 const useStyles = makeStyles(theme => ({
     root: {
       '& .MuiTextField-root': {
@@ -46,13 +50,119 @@ const useStyles = makeStyles(theme => ({
       createData('Frozen yoghurt', 15, 6.0, 24, 4.0),
      
     ];
-  export default function FormPropsTextFields() {
-    const classes = useStyles();
-   
-    const [country, setCountry] = React.useState('');
-    const handleChange = event => {
-      setCountry(event.target.value);
-    };
+  class FormPropsTextFields extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        country: "",
+        language:"",
+        file:"",
+        filename:"",
+        docId:"",
+        title:"",
+        type:"",
+        decs:"",
+        authority:"",
+        source:"",
+        market:"",
+        uploadedBy:""
+      };
+      this.handleLanguage = this.handleLanguage.bind(this);
+      this.handleCountry = this.handleCountry.bind(this);
+      this.handleFiles = this.handleFiles.bind(this);
+      this.handleDocID = this.handleDocID.bind(this);
+      this.handleType = this.handleType.bind(this);
+      this.handleTitle = this.handleTitle.bind(this);
+      this.handleDescription = this.handleDescription.bind(this);
+      this.handleAuthority = this.handleAuthority.bind(this);
+      this.handleSource = this.handleSource.bind(this);
+      this.handleMarket = this.handleMarket.bind(this);
+      this.handleUploadedBy = this.handleUploadedBy.bind(this);
+      this.uploadDocument = this.uploadDocument.bind(this);
+      
+    }
+    componentDidMount() {
+      var isloggedIn = sessionstorage.getItem("loggedIn");
+      if(!isloggedIn || isloggedIn == "false"){
+        window.location = '/';
+      }
+    }
+    uploadDocument = () => {
+      var data = new FormData();
+      data.append("documents", this.state.file);
+      // data.append("file", this.state.file);
+      data.append("id", this.state.docId);
+      data.append("title", this.state.title);
+      data.append("description", this.state.decs);
+      data.append("type", this.state.type);
+      data.append("authority", this.state.authority);
+      data.append("source", this.state.source);
+      data.append("market", this.state.market);
+      data.append("language", this.state.language);
+      data.append("country", this.state.country);
+      data.append("uploadedBy", this.state.uploadedBy);
+      data.append("uploadDate", new Date());
+
+      axios.post("http://localhost:4000/api/document/upload", data).then(res => {
+        console.log("http://localhost:4000/api/document/upload =====> ",res);
+        if(res.data.status === "success"){
+          alert(res.data.message);
+          window.location = '/';
+        }else{
+          alert(res.data.message);
+        }
+      });
+    }
+
+    handleCountry = (event) => {
+      this.setState({country:event.target.value});
+    }
+
+    handleLanguage = (event) => {
+      this.setState({language:event.target.value});
+    }
+
+    handleFiles = (event) => {
+      console.log("======>",event.target.files[0]);
+      this.setState({file : event.target.files[0]});
+      this.setState({filename : event.target.value});
+      console.log("======>",event.target.value);
+    }
+    
+    handleDocID = (event) => {
+      this.setState({docId:event.target.value});
+    }
+
+    handleType = (event) => {
+      this.setState({type:event.target.value});
+    }
+    
+    handleTitle = (event) => {
+      this.setState({title:event.target.value});
+    }
+
+    handleDescription = (event) => {
+      this.setState({decs:event.target.value});
+    }
+    
+    handleAuthority = (event) => {
+      this.setState({authority:event.target.value});
+    }
+
+    handleSource = (event) => {
+      this.setState({source:event.target.value});
+    }
+    
+    handleMarket = (event) => {
+      this.setState({market:event.target.value});
+    }
+
+    handleUploadedBy = (event) => {
+      this.setState({uploadedBy:event.target.value});
+    }
+    
+    render(){
+    const { classes, ...rest } = this.props;
     return (
       <div class="containter" id="inserDocCon">
       <div id="btable">
@@ -69,45 +179,58 @@ const useStyles = makeStyles(theme => ({
         <TableHead></TableHead>
         <TableRow  id="table" cellpadding="10" >
         <TableCell id="left"  cellpadding="10">  
-          <TextField required id="standard-required" class="insertdocstextfield"  label=""  placeholder="   Document Id" defaultValue="" ><img src="./src/assets/createaccount/star.svg" alt="golf"/></TextField><br/>
-          <TextField required id="standard-required" class="insertdocstextfield"   label=""  placeholder="    Title" defaultValue="" /><br/>
-          <TextField required id="standard-required" class="insertdocstextfield"  label=""  placeholder="    Description" defaultValue="" /><br/>
-          <TextField required id="standard-required" class="insertdocstextfield"  label=""  placeholder="    Path" defaultValue="" /><br/>
-          <TextField required id="standard-required" class="insertdocstextfield"  label=""  placeholder="    type" defaultValue="" /><br/>
-          <TextField required id="standard-required" class="insertdocstextfield"  label=""  placeholder="    authority" defaultValue="" /><br/>
+          <TextField required id="standard-required" value={this.state.docId} onChange={this.handleDocID} class="insertdocstextfield"  label=""  placeholder="   Document Id" defaultValue="" ><img src="./src/assets/createaccount/star.svg" alt="golf"/></TextField><br/>
+          <TextField required id="standard-required" value={this.state.title} onChange={this.handleTitle} class="insertdocstextfield"   label=""  placeholder="    Title" defaultValue="" /><br/>
+          <TextField required id="standard-required" value={this.state.decs} onChange={this.handleDescription} class="insertdocstextfield"  label=""  placeholder="    Description" defaultValue="" /><br/>
+          <input accept="*/*" type="file"   id="icon-button-file"  value={this.state.filename} onChange={this.handleFiles}/><br/>
+          {/* <TextField required id="standard-required" class="insertdocstextfield"  label=""  placeholder="    Path" defaultValue="" /><br/> */}
+          {/* <TextField required id="standard-required" value={this.state.type} onChange={this.handleType} class="insertdocstextfield"  label=""  placeholder="    type" defaultValue="" /><br/> */}
+          <TextField required id="standard-required" value={this.state.source} onChange={this.handleSource} class="insertdocstextfield"   label=""  placeholder="    source" defaultValue="" /><br/>
+          
           
           </TableCell>
          <TableCell id="right"  cellpadding="10" >
          <br/>
-         <TextField required id="standard-required" class="insertdocstextfieldright"   label=""  placeholder="    source" defaultValue="" /><br/>
-          <TextField required id="standard-required" class="insertdocstextfieldright"   label=""  placeholder="    market" defaultValue="" /><br/>
+         <TextField required id="standard-required" value={this.state.authority} onChange={this.handleAuthority} class="insertdocstextfieldright"  label=""  placeholder="    authority" defaultValue="" /><br/>
+          <TextField required id="standard-required" value={this.state.market} onChange={this.handleMarket} class="insertdocstextfieldright"   label=""  placeholder="    market" defaultValue="" /><br/>
           <FormControl className={classes.formControl} id="select1" >
-          <Select value={country} onChange={handleChange} displayEmpty className={classes.selectEmpty}>
+          <Select value={this.state.language} onChange={this.handleLanguage} displayEmpty className={classes.selectEmpty}>
             <MenuItem value="" disabled>
                 Language
             </MenuItem>
-            <MenuItem value={10}>Hindi</MenuItem>
-            <MenuItem value={20}>English</MenuItem>
-            <MenuItem value={30}>Punjabi</MenuItem>
+            <MenuItem value="Hindi">Hindi</MenuItem>
+            <MenuItem value="English">English</MenuItem>
+            <MenuItem value="Punjabi">Punjabi</MenuItem>
           </Select>
          
         </FormControl><br/>
         <FormControl className={classes.formControl} id="select1" >
-          <Select value={country} onChange={handleChange} displayEmpty className={classes.selectEmpty}>
+          <Select value={this.state.type} onChange={this.handleType} displayEmpty className={classes.selectEmpty}>
+            <MenuItem value="" disabled>
+                Type
+            </MenuItem>
+            <MenuItem value="Report">Report</MenuItem>
+            <MenuItem value="Regulation">Regulation</MenuItem>
+            <MenuItem value="Other">Other</MenuItem>
+          </Select>
+         
+        </FormControl><br/>
+        <FormControl className={classes.formControl} id="select1" >
+          <Select value={this.state.country} onChange={this.handleCountry} displayEmpty className={classes.selectEmpty}>
             <MenuItem value="" disabled>
                 Country
             </MenuItem>
-            <MenuItem value={10}>India</MenuItem>
-            <MenuItem value={20}>Us</MenuItem>
-            <MenuItem value={30}>America</MenuItem>
+            <MenuItem value="India">India</MenuItem>
+            <MenuItem value="Us">Us</MenuItem>
+            <MenuItem value="America">America</MenuItem>
           </Select>
          
-        </FormControl>
-          <TextField required id="standard-required" class="insertdocstextfieldrightdown"  label=""  placeholder="   Uploaded By" defaultValue="" />
-          <TextField required id="standard-required" class="insertdocstextfieldrightdown"  label=""  placeholder="   UploadedDateTime" defaultValue="" />
+        </FormControl><br />
+          <TextField required id="standard-required" value={this.state.uploadedBy} onChange={this.handleUploadedBy} class="insertdocstextfieldrightdown"  label=""  placeholder="   Uploaded By" defaultValue="" />
+          {/* <TextField required id="standard-required" class="insertdocstextfieldrightdown"  label=""  placeholder="   UploadedDateTime" defaultValue="" /> */}
   </TableCell>
-  <input accept="image/*" type="file"    style={{display:'none'}}        id="icon-button-file" />
-  <Button variant="raised"  id="insertdocsbutton" ><label htmlFor="icon-button-file" >Upload </label></Button>
+  
+  <Button variant="raised"  id="insertdocsbutton" onClick={this.uploadDocument}>Upload</Button>
         </TableRow>
           </Table>
           </TableContainer >
@@ -117,3 +240,10 @@ const useStyles = makeStyles(theme => ({
   </div>
     );
   }
+}
+
+  FormPropsTextFields.propTypes = {
+    classes: PropTypes.object.isRequired
+  };
+  
+  export default withStyles(useStyles)(FormPropsTextFields);

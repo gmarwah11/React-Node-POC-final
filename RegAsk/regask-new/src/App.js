@@ -20,7 +20,7 @@ class App extends Component {
       // type:'login',
       type:'changepassword',
       // type:'adduser',
-      username:'Super Admin',
+      username:sessionstorage.getItem("userName"),
       // type:'login',
       loggedIn: false,
       mobileOpen:false
@@ -31,7 +31,7 @@ class App extends Component {
   }
   getUser() {
     axios.get("/user/").then(response => {
-      console.log("chandan====>",response);
+      //console.log("chandan====>",response);
       if (response.data.user) {
         // console.log("Get User: There is a user saved in the server session: ");
         sessionstorage.setItem("userName", response.data.user.username);
@@ -48,7 +48,7 @@ class App extends Component {
         sessionstorage.setItem("loggedIn", false);
         this.setState({
           loggedIn: false,
-          username:'Super Admin'
+          username:'null'
         });
 		    this.props.location.pathname = "/login";
       }
@@ -60,16 +60,20 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    console.log("componentDidMount====>",!sessionstorage.getItem("loggedIn"), typeof(!sessionstorage.getItem("loggedIn")));
-    if(!sessionstorage.getItem("loggedIn")){
+    console.log("componentDidMount====>",!sessionstorage.getItem("loggedIn"), sessionstorage.getItem("userName"));
+    window.addEventListener("resize", this.resizeFunction);
+    var isloggedIn = sessionstorage.getItem("loggedIn");
+    var userName = sessionstorage.getItem("userName");
+    // this.getUser();
+    if(!isloggedIn || isloggedIn == "false" ){
       this.getUser();
     }else{
       this.setState({
         loggedIn: true,
-        username: sessionstorage.getItem("userName")
+        username: userName
       });
     }
-    window.addEventListener("resize", this.resizeFunction);
+    
   }
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
@@ -82,10 +86,10 @@ class App extends Component {
     window.removeEventListener("resize", this.resizeFunction);
   }
   render() {
-    console.log("chandan====>",this.state.username);
+    var isloggedIn = sessionstorage.getItem("loggedIn");
     return (
       <div  > 
-        {this.state.loggedIn ?  (<HomeContainer username={this.state.username}/> ) : (<AuthContainer type={this.state.type} />)}
+        {!isloggedIn || isloggedIn == "false" ?  (<AuthContainer type={this.state.type} /> ) : (<HomeContainer username={this.state.username}/>)}
       </div>
     );
   }
