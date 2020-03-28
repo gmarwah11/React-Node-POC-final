@@ -56,7 +56,7 @@ const app = express();
 
 /**
  * @swagger
- * /api/documents/fetch/{fn}:
+ * /api/document/fetch/{fn}:
  *   get:
  *     tags:
  *       - Documents
@@ -76,7 +76,7 @@ const app = express();
 
 /**
  * @swagger
- * /api/documents/list:
+ * /api/document/list:
  *   get:
  *     tags:
  *       - Documents
@@ -90,7 +90,7 @@ const app = express();
 
  /**
  * @swagger
- * /api/documents/search/{q}:
+ * /api/document/search/{q}:
  *   get:
  *     tags:
  *       - Documents

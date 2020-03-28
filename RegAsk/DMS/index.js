@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
+var cors = require('cors')
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser')
 const routes = require('./routes/index')
-
+app.use(cors());
 app.use(express.json({limit: '1000mb'}));
 app.use(express.urlencoded({limit: '1000mb'}));
 //serving static files

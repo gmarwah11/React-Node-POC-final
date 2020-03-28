@@ -18,8 +18,8 @@ var formatted = dt.format('Y-m-d H:M:S');
 router.post('/upload', upload.single('documents'), (req, res, next) => {
     try {
         const file = req.file
+        console.log(file)
         if (!file) {
-
             res.status(400).json({
                 "status": "failed",
                 "code": "400",
@@ -28,16 +28,11 @@ router.post('/upload', upload.single('documents'), (req, res, next) => {
 
         }
 
-        res.status(200).json({
-            "status": "success",
-            "code": "200",
-            "message": "file uploaded successfully"
-        });
 
         const a = req.body.id
         const b = req.body.title
         const c = req.body.description
-        const d = req.file.filename
+        const d = req.file.originalname
         const e = path.extname(req.file.originalname)
         const f = req.file.path
         const g = req.body.type
@@ -56,6 +51,12 @@ router.post('/upload', upload.single('documents'), (req, res, next) => {
         console.log(n)
             con.query("INSERT INTO Documents  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [a, b, c, d, e, f, g, h, i, j, k, l, m, n], function (err, result, fields) {
                 if (err) throw err;
+                res.status(200).json({
+                    "status": "success",
+                    "code": "200",
+                    "message": "Document uploaded successfully"
+                });
+        
             })
     }
     catch (err) {
@@ -80,7 +81,7 @@ router.get('/fetch/:fn', (req, res) => {
     });
 
 
-router.get('/list', (req, res) => {
+    router.get('/list', (req, res) => {
         con.query("SELECT * FROM Documents", function (err, result, fields) {
             if (err) throw err;
             res.send(result);

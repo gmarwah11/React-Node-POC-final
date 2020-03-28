@@ -2,7 +2,7 @@ const mysql = require('mysql')
 var elasticsearch = require('elasticsearch');
 const con = require('../../../db/common/connection')
 
-module.exports = () =>{
+module.exports = () => {
 
 var client = new elasticsearch.Client({
   host: 'localhost:9200'
@@ -39,9 +39,9 @@ let i = 0
     });
 }
     
-  })
+  //})
 
 });
 
 
-}
+};
