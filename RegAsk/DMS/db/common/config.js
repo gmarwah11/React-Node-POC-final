@@ -9,6 +9,6 @@ const config = {
         // set up your ca correctly to trust the connection
         rejectUnauthorized: false
     },
-    flags: '-FOUND_ROWS,IGNORE_SPACE'
+    flags: '-FOUND_ROWS,IGNORE_SPACE,PROTOCOL_41,PLUGIN_AUTH'
 }
 module.exports = config;
