@@ -69,3 +69,33 @@ li{ width: 230px;
     right: 10%; 
     padding-top: 16px;
 }
+li#addUser{
+    cursor: pointer;
+}
+li#addUser:hover{
+    cursor: pointer;
+    background: darkgray;
+    color: #fff;
+    margin-left: 8px;
+}
+li#listUser{
+    cursor: pointer;
+}
+li#listUser:hover{
+    cursor: pointer;
+    background: darkgray;
+    color: #fff;
+    margin-left: 8px;
+}
+li#uploadDoc{
+    cursor: pointer;
+}
+li#uploadDoc:hover{
+    cursor: pointer;
+    background: darkgray;
+    color: #fff;
+    margin-left: 8px;
+}
+li#logOut{
+    cursor: pointer;
+}

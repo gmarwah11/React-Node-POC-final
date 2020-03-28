@@ -112,7 +112,7 @@ opacity: 1;
 }
 
 #insertdocsbutton{
-  
+  cursor: pointer;
   border-radius: 20px;
   color: white;
   margin-left: 73%;

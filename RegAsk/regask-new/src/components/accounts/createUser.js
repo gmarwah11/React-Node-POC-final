@@ -39,7 +39,8 @@ class CreateOrAddUser extends Component {
       role: "",
       company: "",
       industry: "",
-      errorMsg: ''
+      errorMsg: '',
+      errorMsgCommon: ''
     };
     this.handleUserName = this.handleUserName.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
@@ -62,9 +63,11 @@ class CreateOrAddUser extends Component {
   }
 
   addUser(){
+    this.setState({errorMsg : '',errorMsgCommon: ''});
     console.log("=====>adduser");
-    if(this.state.username == ''){
-      this.setState({errorMsg : 'The user did not fill the email address field'});
+    if(this.state.username == '' || this.state.firstname == '' || this.state.lastname == '' || 
+    this.state.location == '' || this.state.role == '' || this.state.company == ''){
+      this.setState({errorMsgCommon : 'Please fill out mandatory field.'});
     }else{
       axios.post("/user/signup", {
         username: this.state.username,
@@ -135,7 +138,7 @@ class CreateOrAddUser extends Component {
             <div id="leftT">
               <TextField
                 class="fnAU"
-                label="First name"
+                label="* First name"
                 id="filled-search" type="search"
                 onChange={this.handleFirstname}
                 value={this.state.firstname}
@@ -143,7 +146,7 @@ class CreateOrAddUser extends Component {
               <br></br>
               <TextField
                 class="eAU"
-                label="Email"
+                label="* Email"
                 id="filled-search" type="search"
                 onChange={this.handleUserName}
                 value={this.state.username}
@@ -152,7 +155,7 @@ class CreateOrAddUser extends Component {
               <div className="errorDiv">{this.state.errorMsg}</div>
               <TextField
                 class="cnAU"
-                label="Company name"
+                label="* Company name"
                 id="filled-search" type="search"
                 onChange={this.handleCompany}
                 value={this.state.company}
@@ -180,7 +183,7 @@ class CreateOrAddUser extends Component {
             <div id="rightT">
             <TextField
                 class="lnAU"
-                label="Last name"
+                label="* Last name"
                 id="filled-search" type="text"
                 onChange={this.handleLastname}
                 value={this.state.lastname}
@@ -188,14 +191,14 @@ class CreateOrAddUser extends Component {
               <br></br>
               <TextField
                 class="roleAU"
-                label="Role"
+                label="* Role"
                 id="filled-search" type="text"
                 onChange={this.handleRole}
                 value={this.state.role}
               />
               <br></br>
             <FormControl id="locationAU"  >
-        <InputLabel id="demo-simple-select-label">Location</InputLabel>
+        <InputLabel id="demo-simple-select-label">* Location</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -223,6 +226,7 @@ class CreateOrAddUser extends Component {
         </Select>
       </FormControl>   
             </div>
+            <div className="errorDivCommon">{this.state.errorMsgCommon}</div>
             <div id="create" alt=""  onClick={this.addUser}>Create</div> 
             {/* <img src={require('./assets/addUser/Creatbutton/Disabled button.png')} id="create" alt=""  onClick={this.addUser} /> */}
           </div>
