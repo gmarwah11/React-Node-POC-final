@@ -111,7 +111,7 @@ const useStyles = makeStyles(theme => ({
       data.append("market", this.state.market);
       data.append("language", this.state.language);
       data.append("country", this.state.country);
-      data.append("uploadedBy", this.state.uploadedBy);
+      data.append("uploadedBy", 1);
       data.append("uploadDate", new Date());
 
       axios.post("http://localhost:4000/api/document/upload", data).then(res => {
