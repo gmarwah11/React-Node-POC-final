@@ -107,6 +107,126 @@ const app = express();
  *       200:
  *         description: Search successfull
  */
+ 
+/**
+ * @swagger
+ * /user/account/signup:
+ *   post:
+ *     tags:
+ *       - Account
+ *     description: Signup
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: formData
+ *         name: username
+ *         type: string
+ *       - name: firstname
+ *         in: formData
+ *         type: string
+ *       - name: lastname
+ *         in: formData
+ *         type: string
+ *         require: true
+ *       - name: ex
+ *         in: formData
+ *         type: string
+ *       - name: phone
+ *         in: formData
+ *         type: string
+ *         enum: [ "Regulation", "Report", "other"]
+ *       - name: location
+ *         in: formData
+ *         type: string
+ *       - name: industry
+ *         in: formData
+ *         type: string
+ *       - name: role
+ *         in: formData
+ *         type: string
+ *       - name: company
+ *         in: formData
+ *         type: string
+ *         enum: [ "English", "Hindi", "other"]
+ *     responses:
+ *       ..:
+ *         description: ..
+ */
 
+ /**
+ * @swagger
+ * /user/account/session:
+ *   get:
+ *     tags:
+ *       - Account
+ *     description: Current Session
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Current Session
+ */
 
+ /**
+ * @swagger
+ * /user/account/login:
+ *   post:
+ *     tags:
+ *       - Account
+ *     description: Login
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: formData
+ *         name: username
+ *         type: string
+ *         require: true
+ *       - name: password
+ *         in: formData
+ *         type: string
+ *         require: true
+ *     responses:
+ *       ..:
+ *         description: ..
+ */
 
+ /**
+ * @swagger
+ * /user/account/changePassword:
+ *   post:
+ *     tags:
+ *       - Account
+ *     description: Change Password
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: formData
+ *         name: tempPassword
+ *         type: string
+ *         require: true
+ *       - name: newPassword
+ *         in: formData
+ *         type: string
+ *         require: true
+ *       - name: userName
+ *         in: formData
+ *         type: string
+ *         require: true
+ *     responses:
+ *       ..:
+ *         description: ..
+ */
+
+ /**
+ * @swagger
+ * /user/account/logout:
+ *   post:
+ *     tags:
+ *       - Account
+ *     description: Logout
+ *     consumes:
+ *       - application/json
+ *     responses:
+ *       ..:
+ *         description: ..
+ */
