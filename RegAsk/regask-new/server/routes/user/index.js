@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 const express = require("express");
 const router = express.Router();
-const User = require("../database/models/user");
+const User = require("../../database/models/user");
 const bcrypt = require("bcryptjs");
-const passport = require("../passport");
+const passport = require("../../passport");
 // Define schema
 randomOrTempPasswordGenerate = function(max,min){
     var passwordChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#@!%&()/";
@@ -20,6 +20,9 @@ router.post("/signup", (req, res) => {
     User.findOne({ username: username }, (err, user) => {
         if (err) {
             console.log("User.js post error: ", err);
+            res.json({
+                error: `Something went wrong. Please try again.`
+            });
         } else if (user) {
             res.json({
                 error: `Sorry, already a user with the username: ${username}`
@@ -38,7 +41,10 @@ router.post("/signup", (req, res) => {
                 industry: industry
             });
             newUser.save((err, savedUser) => {
-                if (err) return res.json(err);
+                if (err) {
+                    console.log("User.js post error: ", err);
+                    return res.json({error: `Something went wrong. Please try again.`});
+                }
                 res.json(savedUser);
             });
         }

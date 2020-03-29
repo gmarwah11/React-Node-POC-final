@@ -110,7 +110,7 @@ class Login extends Component {
           <NavLink to="/changepassword" type={Button} className="nav-link-item"> <img src={require('./assets/login/Forgot password/Forgot password.png')} onClick={this.doFP} style={{ display: this.state.showFP ? 'block' : 'none' }} id="fp" alt="" />   </NavLink>
 
           {/* <img src={require('./assets/login/EPIncorrect/Group 40.png')} id="empi" style={{ display: this.state.showEMI ? 'block' : 'none' }} alt="" /> */}
-          <div className="errorDiv">{this.state.errorMsg}</div> 
+          <div className="errorDivLogin">{this.state.errorMsg}</div> 
 
           <br></br>
 

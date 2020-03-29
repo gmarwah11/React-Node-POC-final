@@ -1,0 +1,23 @@
+[Service]
+WorkingDirectory=/home/rskdevadm/var/www/React-Node-POC-final/RegAsk/regask-new
+
+ExecStart=/usr/bin/npm start 
+Restart=always
+RestartSec=30
+StandardOutput=syslog
+
+StandardError=syslog
+
+SyslogIdentifier=IMS
+
+User=rskdevadm
+
+Group=rskdevadm
+
+Environment=NODE_ENV=production 
+
+PORT=3000
+
+
+[Install]
+WantedBy=multi-user.target

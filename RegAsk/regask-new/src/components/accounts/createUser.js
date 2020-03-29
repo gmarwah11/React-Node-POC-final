@@ -80,6 +80,11 @@ class CreateOrAddUser extends Component {
         company: this.state.company,
         industry: this.state.industry
       }).then(response => {
+        if(response.error){
+
+        }else{
+          alert("User account successfully added.");
+        }
         setTimeout(function(){
             window.location = "/";
         },100);
@@ -205,9 +210,9 @@ class CreateOrAddUser extends Component {
           onChange={this.handleLocation}
           value={this.state.location}
         >
-          <MenuItem value={10}>India</MenuItem>
-          <MenuItem value={20}>UK</MenuItem>
-          <MenuItem value={30}>US</MenuItem>
+          <MenuItem value="india">India</MenuItem>
+          <MenuItem value="us">US</MenuItem>
+          <MenuItem value="singapore">Singapore</MenuItem>
         </Select>
       </FormControl>
       <br></br>
@@ -220,9 +225,9 @@ class CreateOrAddUser extends Component {
           value={this.state.industry}
           
         >
-          <MenuItem value={10}>IT</MenuItem>
-          <MenuItem value={20}>Non IT</MenuItem>
-          <MenuItem value={30}>Civil</MenuItem>
+          <MenuItem value="it">IT</MenuItem>
+          <MenuItem value="non-it">Non IT</MenuItem>
+          <MenuItem value="other">Civil</MenuItem>
         </Select>
       </FormControl>   
             </div>

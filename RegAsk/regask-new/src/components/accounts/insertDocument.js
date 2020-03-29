@@ -65,7 +65,8 @@ const useStyles = makeStyles(theme => ({
         authority:"",
         source:"",
         market:"",
-        uploadedBy:""
+        uploadedBy:sessionstorage.getItem("userName"),
+        errMsg: ''
       };
       this.handleLanguage = this.handleLanguage.bind(this);
       this.handleCountry = this.handleCountry.bind(this);
@@ -88,6 +89,16 @@ const useStyles = makeStyles(theme => ({
       }
     }
     uploadDocument = () => {
+      if(this.state.file == "" || this.state.docId == "" || this.state.title == "" || this.state.type == "" || this.state.authority == "" ||
+      this.state.market == "" || this.state.source == "" || this.state.decs == "" || this.state.language == "" || this.state.country == ""){
+        this.setState({
+          errMsg: "Please fill out mandatory field."
+        });
+      }else{
+        this.setState({
+          errMsg: ""
+        });
+      }
       var data = new FormData();
       data.append("documents", this.state.file);
       // data.append("file", this.state.file);
@@ -171,7 +182,7 @@ const useStyles = makeStyles(theme => ({
            <div id="bright"></div>
            <div id="usercenter">
              <center>  
-           <div id="insertdocs"><h5>Insert Documents</h5> </div></center>
+           <div id="insertdocs"><h5>Upload Document</h5> </div></center>
            <div id="docscenter">
       <form className={classes.root} noValidate autoComplete="off" width="550px">
       <TableContainer component={Paper}>
@@ -198,9 +209,9 @@ const useStyles = makeStyles(theme => ({
             <MenuItem value="" disabled>
                 Language
             </MenuItem>
-            <MenuItem value="Hindi">Hindi</MenuItem>
-            <MenuItem value="English">English</MenuItem>
-            <MenuItem value="Punjabi">Punjabi</MenuItem>
+            <MenuItem value="hindi">Hindi</MenuItem>
+            <MenuItem value="english">English</MenuItem>
+            <MenuItem value="french">French</MenuItem>
           </Select>
          
         </FormControl><br/>
@@ -220,16 +231,16 @@ const useStyles = makeStyles(theme => ({
             <MenuItem value="" disabled>
                 Country
             </MenuItem>
-            <MenuItem value="India">India</MenuItem>
-            <MenuItem value="Us">Us</MenuItem>
-            <MenuItem value="America">America</MenuItem>
+            <MenuItem value="india">India</MenuItem>
+            <MenuItem value="us">US</MenuItem>
+            <MenuItem value="singapore">Singapore</MenuItem>
           </Select>
          
         </FormControl><br />
           <TextField required id="standard-required" value={this.state.uploadedBy} onChange={this.handleUploadedBy} class="insertdocstextfieldrightdown"  label=""  placeholder="   Uploaded By" defaultValue="" />
           {/* <TextField required id="standard-required" class="insertdocstextfieldrightdown"  label=""  placeholder="   UploadedDateTime" defaultValue="" /> */}
   </TableCell>
-  
+  <div className="errMsgUD">{this.state.errMsg}</div>
   <Button variant="raised"  id="insertdocsbutton" onClick={this.uploadDocument}>Upload</Button>
         </TableRow>
           </Table>

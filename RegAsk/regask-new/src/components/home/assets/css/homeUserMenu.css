@@ -1,7 +1,8 @@
 #userMenuCon{ 
     position: absolute;
-    top: 8%;
+    top: 10%;
     right: 3%;
+    height: 33%;
     background: transparent url('../menu/Union/Union 1.png') 0% 0% no-repeat padding-box;
     /* border: 1px solid green; */
 }
@@ -23,19 +24,18 @@ ul{
 }
 li{ width: 230px;
     height: 54px;
+    margin-left: 8px;
     /* border: 1px solid blanchedalmond; */
 }
-#logOut{  
+/* #logOut{  
     width: 229px; 
     height: 54px;
-    background-color: #022B49;
-    left: 2%;
     opacity: 1;
     position: absolute;
     padding-left: -4px; 
-}  
+}   */
 .addUcontent{  
-    color: #5D5D5D;
+    /* color: #5D5D5D; */
     font-size: 18px;
     font-family: Helvetica;
     /* padding-left: 30px; */
@@ -52,30 +52,29 @@ li{ width: 230px;
     padding-top: 24px;
 }
 #logoutContent{
-   
+    /* color: #5D5D5D; */
     font-size: 18px;
     font-family: Helvetica;
     /* padding-left: 30px; */
-    padding-top: 12px;
+    padding-top: 20px;
     left: 13%;
     /* padding: 15px 143px 18px 29px; */
     opacity: 100%;
     padding-top: -6px;
     position: absolute;
- color:   #FFFFFF;
 }
 #logOutPic{ 
     position: absolute;
     right: 10%; 
-    padding-top: 16px;
+    padding-top: 24px;
 }
 li#addUser{
     cursor: pointer;
 }
 li#addUser:hover{
     cursor: pointer;
-    background: darkgray;
-    color: #fff;
+    background: #022B49;
+    color: #fff !important;
     margin-left: 8px;
 }
 li#listUser{
@@ -83,8 +82,8 @@ li#listUser{
 }
 li#listUser:hover{
     cursor: pointer;
-    background: darkgray;
-    color: #fff;
+    background: #022B49;
+    color: #fff !important;
     margin-left: 8px;
 }
 li#uploadDoc{
@@ -92,10 +91,25 @@ li#uploadDoc{
 }
 li#uploadDoc:hover{
     cursor: pointer;
-    background: darkgray;
-    color: #fff;
+    background: #022B49;
+    color: #fff !important;
     margin-left: 8px;
 }
 li#logOut{
     cursor: pointer;
+}
+li#logOut:hover{
+    cursor: pointer;
+    background: #022B49;
+    color: #fff !important;
+    margin-left: 8px;
+}
+li#logOut:hover{
+    cursor: pointer;
+    background: #022B49;
+    color: #fff !important;
+    margin-left: 8px;
+}
+li span:hover{
+    color: #fff !important;
 }

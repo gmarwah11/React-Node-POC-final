@@ -1,4 +1,4 @@
-.errorDiv{
+.errorDivLogin{
     position: absolute;
     top: 433px;
     left: 565px;
@@ -128,7 +128,7 @@ body{
     top: 286px;
     left: 594px;
      
-    width: 168px;
+    width: 220px;
     height: 18px;
     /* border: 1px solid red; */
     /* background: transparent url('img/davidlim@company.com.png') 0% 0% no-repeat padding-box; */
@@ -138,8 +138,7 @@ body{
     position: absolute;
     top: 354px;
     left: 594px;
-    width: 168px;
-    height: 18px;
+    width: 220px;
     /* border: 1px solid red; */
     /* background: transparent url('img/*****************.png') 0% 0% no-repeat padding-box; */
     opacity: 1;
