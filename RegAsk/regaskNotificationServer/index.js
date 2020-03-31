@@ -22,7 +22,7 @@ app.use(session({secret:'regaskaaserver',cookie:{maxAge:60000},resave:false,save
 if(!isProduction){
     app.use(errorHandler());
 } 
-app.use('/',routes);
+
   
 const err = {error:'error is related to Express',status:'500'};
 if(!isProduction){
@@ -45,20 +45,22 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerOptions = {
   swaggerDefinition: {
     info: {
-      title: "IMS Notification",
-      description: "IMS Send Mail Notification service",
+      title: "Email Notification",
+      description: "Send Mail Notification service",
       contact: {
         name: "Regask"
       },
       servers:['http://localhost:5000']
     }
   },
-  apis: ['.routes/*.js'] 
+  apis: ['./routes/swagger/*.js'] 
   // apis: ["index.js"]
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+ 
+app.use('/',routes);
 /////////////////////////////////////////////////////////////////////////////
 app.listen(5000 || process.env.PORT,(err,data)=>{
    if(err){
