@@ -27,7 +27,9 @@ class Login extends Component {
       passwordErrorMsg: "",
       passwordError: false,
       commonError: false,
-      commonErrorMsg:""
+      commonErrorMsg:"",
+      isLoginDone: false,
+      pageRediarect: ''
     };
     this.getUser = this.getUser.bind(this);
     this.handleUsername = this.handleUsername.bind(this);
@@ -39,13 +41,17 @@ class Login extends Component {
     if(this.state.username == ''){
 		this.setState({
 			usernameErrorMsg:"The user did not fill the email address field.",
-			usernameError: true
+            usernameError: true,
+            passwordErrorMsg:"",
+			passwordError: false
 		});
 		return false;
 	}else if(this.state.password == ''){
 		this.setState({
 			passwordErrorMsg:"The user did not fill the password field.",
-			passwordError: true
+            passwordError: true,
+            usernameErrorMsg:"",
+			usernameError: false,
 		});
 		return false;
 	}else{
@@ -71,8 +77,9 @@ class Login extends Component {
     this.setState({commonError: false, commonErrorMsg:""});
     console.log("=====>login");
     if(this.validation()){
-        var password = this.state.password;
-        var reversePassword = password.split('').reverse().join('');
+        let password = this.state.password;
+        let reversePassword = password.split('').reverse().join('');
+        let me = this;
         axios.post("http://localhost:5000/user/login", {
             username: this.state.username,
             password: this.state.password
@@ -83,23 +90,23 @@ class Login extends Component {
                 sessionstorage.setItem("userId", response.data.user.id);
                 sessionstorage.setItem("loggedIn", true);
                 if(password.includes('TE') && password.includes('MP') && password.startsWith("TE") && reversePassword.startsWith("PM")){
-                    return <Redirect to="/changePassword" push={true} />
+                    me.setState({pageRediarect:'/changePassword',isLoginDone:true});
                 }else{
-                    return <Redirect to="/home" push={true} />
+                    me.setState({pageRediarect:'/home',isLoginDone:true});
                 }
             }else{
                 sessionstorage.setItem("token",null);
                 sessionstorage.setItem("userName", null);
                 sessionstorage.setItem("userId", null);
                 sessionstorage.setItem("loggedIn", false);
-                this.setState({commonError: true, commonErrorMsg:response.datamsg});
+                this.setState({commonError: true, commonErrorMsg:response.data.msg,isLoginDone:false});
             }
         }).catch(error => {
             sessionstorage.setItem("token",null);
             sessionstorage.setItem("userName", null);
             sessionstorage.setItem("userId", null);
             sessionstorage.setItem("loggedIn", false);
-            this.setState({ showEMI: true,isSendLoginAPI:true,errorMsg:"Wrong email or password" });
+            this.setState({ showEMI: true,isSendLoginAPI:true,commonError: true,commonErrorMsg:"Wrong email or password",isLoginDone:false });
             console.log(error);
             // return true;
         });
@@ -111,12 +118,15 @@ class Login extends Component {
   }
 	
   render() {
-	if (this.getUser()) return <Redirect to={{pathname: "/home"}} />;
+	if (this.getUser()) {
+		return <Redirect to={{pathname: "/home"}} />;
+    }
+    if (this.state.isLoginDone) {
+		return <Redirect to={{pathname: this.state.pageRediarect}} />;
+	}
 	const { classes } = this.props;
     return (
-      <div
-		  className={classes.pageHeader}
-	  >
+        <div className={classes.pageHeader}>
 		  <div className={classes.container}>
 			<GridContainer justify="center">
               <GridItem xs={12} sm={12} md={3} className={classes.brandwapper}>

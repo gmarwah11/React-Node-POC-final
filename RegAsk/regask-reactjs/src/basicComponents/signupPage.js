@@ -28,9 +28,6 @@ class Signup extends Component {
 		username: "",
 		usernameErrorMsg: "",
       	usernameError: false,
-		password: "",
-		passwordErrorMsg: "",
-		passwordError: false,
 		firstname: "",
 		firstnameErrorMsg: "",
 		firstnameError: false,
@@ -50,7 +47,8 @@ class Signup extends Component {
 		phone: "",
 		ex: "",
 		errorMsg: '',
-		errorMsgCommon: ''
+		errorMsgCommon: '',
+		iscreateUserDone: false
     };
 	this.handleUserName = this.handleUserName.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
@@ -77,38 +75,95 @@ class Signup extends Component {
   validation(){
 	if(this.state.username == ''){
 		this.setState({
-			usernameErrorMsg:"Please fill out mandatory field.",
-			usernameError: true
+			usernameErrorMsg:"Please fill out username field.",
+			usernameError: true,
+			companyErrorMsg:"",
+			companyError: false,
+			roleErrorMsg:"",
+			roleError: false,
+			locationErrorMsg:"",
+			locationError: false,
+			lastnameErrorMsg:"",
+			lastnameError: false,
+			firstnameErrorMsg:"",
+			firstnameError: false,
+			iscreateUserDone: false
 		});
 		return false;
 	}else if(this.state.firstname == ''){
 		this.setState({
-			firstnameErrorMsg:"Please fill out mandatory field.",
-			firstnameError: true
+			firstnameErrorMsg:"Please fill out firstname field.",
+			firstnameError: true,
+			usernameErrorMsg:"",
+			usernameError: false,
+			companyErrorMsg:"",
+			companyError: false,
+			roleErrorMsg:"",
+			roleError: false,
+			locationErrorMsg:"",
+			locationError: false,
+			lastnameErrorMsg:"",
+			lastnameError: false,
+			usernameErrorMsg:"",
+			usernameError: false,
+			iscreateUserDone: false
 		});
 		return false;
 	}else if( this.state.lastname == ''){
 		this.setState({
-			lastnameErrorMsg:"Please fill out mandatory field.",
-			lastnameError: true
-		});
-		return false;
-	}else if(this.state.location == ''){
-		this.setState({
-			locationErrorMsg:"Please fill out mandatory field.",
-			locationError: true
+			lastnameErrorMsg:"Please fill out lastname field.",
+			lastnameError: true,
+			usernameErrorMsg:"",
+			usernameError: false,
+			companyErrorMsg:"",
+			companyError: false,
+			roleErrorMsg:"",
+			roleError: false,
+			locationErrorMsg:"",
+			locationError: false,
+			firstnameErrorMsg:"",
+			firstnameError: false,
+			usernameErrorMsg:"",
+			usernameError: false,
+			iscreateUserDone: false
 		});
 		return false;
 	}else if(this.state.role == ''){
 		this.setState({
-			roleErrorMsg:"Please fill out mandatory field.",
-			roleError: true
+			roleErrorMsg:"Please fill out role field.",
+			roleError: true,
+			usernameErrorMsg:"",
+			usernameError: false,
+			companyErrorMsg:"",
+			companyError: false,
+			locationErrorMsg:"",
+			locationError: false,
+			lastnameErrorMsg:"",
+			lastnameError: false,
+			firstnameErrorMsg:"",
+			firstnameError: false,
+			usernameErrorMsg:"",
+			usernameError: false,
+			iscreateUserDone: false
 		});
 		return false;
 	}else if( this.state.company == ''){
 		this.setState({
-			companyErrorMsg:"Please fill out mandatory field.",
-			companyError: true
+			companyErrorMsg:"Please fill out company field.",
+			companyError: true,
+			usernameErrorMsg:"",
+			usernameError: false,
+			roleErrorMsg:"",
+			roleError: false,
+			locationErrorMsg:"",
+			locationError: false,
+			lastnameErrorMsg:"",
+			lastnameError: false,
+			firstnameErrorMsg:"",
+			firstnameError: false,
+			usernameErrorMsg:"",
+			usernameError: false,
+			iscreateUserDone: false
 		});
 		return false;
 	}else{
@@ -126,17 +181,19 @@ class Signup extends Component {
 			firstnameErrorMsg:"",
 			firstnameError: false,
 			usernameErrorMsg:"",
-			usernameError: false
+			usernameError: false,
+			iscreateUserDone: false
 		});
 		return true;
 	}
   }
 
   addUser(){
-    this.setState({errorMsg : '',errorMsgCommon: ''});
-    console.log("=====>adduser");
+    this.setState({commonError : false,commonErrorMsg: ''});
+	console.log("=====>adduser");
+	let me = this;
     if(this.validation()){
-      axios.post("http://localhost:4040/user/signup", {
+      axios.post("http://localhost:5000/user/adduser", {
         username: this.state.username,
         firstname: this.state.firstname,
         lastname: this.state.lastname,
@@ -146,20 +203,21 @@ class Signup extends Component {
         role: this.state.role,
         company: this.state.company,
         industry: this.state.industry
-      }).then(response => {
-        if(response.error){
-
-        }else{
-          alert("User account successfully added.");
+      },{
+        headers :{
+          Authorization: sessionstorage.getItem('token')
         }
-        setTimeout(function(){
-            window.location = "/login";
-        },100);
+      }).then(response => {
+        if(response.data.error){
+			me.setState({iscreateUserDone: false,commonError: true,commonErrorMsg : response.data.error});
+        }else{
+		  alert("User account successfully added.");
+		  me.setState({
+			iscreateUserDone: true
+		  })
+        }
       }).catch(error => {
-      //   setTimeout(function(){
-      //     window.location.reload();
-      // },100);
-        this.setState({commonErrorMsg : 'The super admin tried to create a user that already exists'});
+        me.setState({iscreateUserDone: false,commonError: true,commonErrorMsg : 'Something went wrong. please try again.'});
       });
     }
   }
@@ -200,6 +258,7 @@ class Signup extends Component {
 	
   render() {
 	if (!this.getUser()) return <Redirect to={{pathname: "/login"}} />;
+	if (this.state.iscreateUserDone) return <Redirect to={{pathname: "/home"}} />;
 	const { classes } = this.props;
     return (
 		<div

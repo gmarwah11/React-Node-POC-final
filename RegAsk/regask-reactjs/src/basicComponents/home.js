@@ -22,31 +22,41 @@ class Home extends Component {
 	  mobileOpen: false,
     };
 	this.getUser = this.getUser.bind(this);
+	this.setSession = this.setSession.bind(this);
 	this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
   }
   
-  getUser = () =>  {
+  setSession = () =>  {
 	if(sessionstorage.getItem("token") != null){
 		this.setState({
 		  loggedIn: true,
 		  username: sessionstorage.getItem("userName")
 		});
-		return true;
 	}else{
 		this.setState({
 		  loggedIn: false,
 		  username: ""
 		});
-		return false;
 	}
+  }
+
+  getUser() {
+	return sessionstorage.getItem("token") !== null ? true : false;
   }
 
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   }
+  componentDidMount() {
+	this.setSession();
+  }
 
   render() {
-	if (!this.getUser()) return <Redirect to={{pathname: "/login"}} />;
+	if (!this.getUser()) {
+		setTimeout(() => {
+			return <Redirect to={{pathname: "/login"}} />;
+		}, 100);
+	}
 	const { classes, ...rest } = this.props;
     return (
       <div className={classes.homePage}>

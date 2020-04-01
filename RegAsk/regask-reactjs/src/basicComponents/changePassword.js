@@ -26,14 +26,128 @@ class ChangePassword extends Component {
 		newpassword: "",
 		newpasswordErrorMsg: "",
 		newpasswordError: false,
-		conpassword: "",
-		conpasswordErrorMsg: "",
-		conpasswordError: false,
+		confirmPassword: "",
+		confirmPasswordErrorMsg: "",
+		confirmPasswordError: false,
 		commonError: false,
-		commonErrorMsg:""
+		commonErrorMsg:"",
+		ischangePasswordDone: false
     };
 	this.getUser = this.getUser.bind(this);
+	this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
+    this.handleNewPassword = this.handleNewPassword.bind(this);
+    this.handleTempPassword = this.handleTempPassword.bind(this);
+    this.changePassword = this.changePassword.bind(this);
   }
+
+  handleConfirmPassword = (event) => {
+    this.setState({ confirmPassword: event.target.value });
+  };
+  handleNewPassword = (event) => {
+    this.setState({ newpassword: event.target.value });
+  };
+  handleTempPassword = (event) => {
+    this.setState({ temppassword: event.target.value });
+  };
+  changePassword = () => {
+	let userName = sessionstorage.getItem("userName");
+	let me = this;
+    console.log("=====>",userName);
+    let re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if(this.state.temppassword == ''){
+		this.setState({ 
+			temppasswordError: true,
+			temppasswordErrorMsg:'Please enter your temp password',
+			newpasswordErrorMsg: "",
+			newpasswordError: false,
+			confirmPasswordErrorMsg: "",
+			confirmPasswordError: false,
+			commonError: false,
+			commonErrorMsg:"",
+		});
+	}else if(this.state.newpassword == ''){
+		this.setState({ 
+			newpasswordError: true,
+			newpasswordErrorMsg:'Please enter your new password',
+			temppasswordErrorMsg: "",
+			temppasswordError: false,
+			confirmPasswordErrorMsg: "",
+			confirmPasswordError: false,
+			commonError: false,
+			commonErrorMsg:"",
+		});
+	}else if(this.state.confirmPassword == ''){
+		this.setState({ 
+			confirmPasswordError: true,
+			confirmPasswordErrorMsg:'Please enter your confirm password',
+			temppasswordErrorMsg: "",
+			temppasswordError: false,
+			newpasswordErrorMsg: "",
+			newpasswordError: false,
+			commonError: false,
+			commonErrorMsg:"",
+		});
+    }else if(!re.test(this.state.newpassword)){
+      this.setState({ 
+		  newpasswordError: true,
+		  newpasswordErrorMsg:'Please enter a password meeting the format requirements',
+		  temppasswordErrorMsg: "",
+		  temppasswordError: false,
+		  confirmPasswordErrorMsg: "",
+		  confirmPasswordError: false,
+		  commonError: false,
+		  commonErrorMsg:"",
+		});
+    }else if(this.state.newpassword !== this.state.confirmPassword ){
+      this.setState({ 
+		  confirmPasswordError: true,
+		  confirmPasswordErrorMsg:'Password and confirm password do not match',
+		  temppasswordErrorMsg: "",
+		  temppasswordError: false,
+		  newpasswordErrorMsg: "",
+		  newpasswordError: false,
+		  commonError: false,
+		  commonErrorMsg:"",
+		});
+    }else{
+      this.setState({ 
+		temppasswordErrorMsg: "",
+		temppasswordError: false,
+		newpasswordErrorMsg: "",
+		newpasswordError: false,
+		confirmPasswordErrorMsg: "",
+		confirmPasswordError: false,
+		commonError: false,
+		commonErrorMsg:"",
+	  });
+      axios.post("http://localhost:5000/user/changePassword", {
+        tempPassword: this.state.tempPassword,
+        newPassword: this.state.newPassword,
+        userName: userName
+      },{
+        headers :{
+          Authorization: sessionstorage.getItem('token')
+        }
+      }).then(response => {
+        me.setState({
+			ischangePasswordDone : true
+		});
+      }).catch(error => {
+        me.setState({
+			ischangePasswordDone : false,
+			commonError: false,
+			commonErrorMsg:"Something went wrong. please try again.",
+			temppasswordErrorMsg: "",
+			temppasswordError: false,
+			newpasswordErrorMsg: "",
+			newpasswordError: false,
+			confirmPasswordErrorMsg: "",
+			confirmPasswordError: false,
+		});
+      });
+    }
+
+  };
   
   getUser() {
 	return sessionstorage.getItem("token") !== null ? true : false;
@@ -41,6 +155,7 @@ class ChangePassword extends Component {
 	
   render() {
 	if (!this.getUser()) return <Redirect to={{pathname: "/login"}} />;
+	if (this.state.ischangePasswordDone) return <Redirect to={{pathname: "/home"}} />;
 	const { classes } = this.props;
     return (
 		<div
@@ -57,7 +172,6 @@ class ChangePassword extends Component {
 					  <div className={classes.confirmpasswordinnerwapper}> 
 						  <CustomInput
 						  labelText="Temp Password"
-						  id="temppassword"
 						  formControlProps={{
 							  fullWidth: true
 						  }}
@@ -68,7 +182,7 @@ class ChangePassword extends Component {
 							  name: "temppassword",
 							  placeholder: "Temp Password",
 							  value: this.state.temppassword,
-							  onChange: this.handleChange,
+							  onChange: this.handleTempPassword,
 							  startAdornment: (
 							  <InputAdornment position="start">
 								  {/* <Email className={classes.inputIconsColor} /> */}
@@ -81,7 +195,6 @@ class ChangePassword extends Component {
 						  />
 						  <CustomInput
 							  labelText="New Password"
-							  id="newpassword"
 							  formControlProps={{
 								  fullWidth: true
 							  }}
@@ -92,7 +205,7 @@ class ChangePassword extends Component {
 								  placeholder: "New Password",
 								  name: "newpassword",
 								  value: this.state.newpassword,
-								  onChange: this.handleChange,
+								  onChange: this.handleNewPassword,
 								  startAdornment: (
 								  <InputAdornment position="start">
 									  <Icon className={classes.inputIconsColor}>
@@ -105,18 +218,17 @@ class ChangePassword extends Component {
 						  />
 						  <CustomInput
 							  labelText="Confirm Password"
-							  id="conpassword"
 							  formControlProps={{
 								  fullWidth: true
 							  }}
-							  errorMsg={this.state.conpasswordErrorMsg}
-							  error={this.state.conpasswordError}
+							  errorMsg={this.state.confirmPasswordErrorMsg}
+							  error={this.state.confirmPasswordError}
 							  inputProps={{
 								  type: "password",
 								  placeholder: "Confirm Password",
 								  name: "conpassword",
-								  value: this.state.conpassword,
-								  onChange: this.handleChange,
+								  value: this.state.confirmPassword,
+								  onChange: this.handleConfirmPassword,
 								  startAdornment: (
 								  <InputAdornment position="start">
 									  <Icon className={classes.inputIconsColor}>
@@ -127,14 +239,14 @@ class ChangePassword extends Component {
 								  autoComplete: "off"
 							  }}
 						  />
-						  {this.state.commonError ? (<div className={classes.confirmpasswordErrorMsg}>
+						  {this.state.commonError ? (<div className={classes.commonErrorMsg}>
 							  <Clear />{this.state.commonErrorMsg}
 						  </div>) : null}
 						  <CustomButton
 							  round
 							  className={classes.confirmpasswordbutton}
 							  size="lg"
-							  onClick={this.handleSubmit}
+							  onClick={this.changePassword}
 						  >
 						  Update
 						  </CustomButton>

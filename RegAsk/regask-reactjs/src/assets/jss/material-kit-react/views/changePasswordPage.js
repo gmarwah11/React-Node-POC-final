@@ -5,7 +5,7 @@ const changePasswordPageStyle = {
     confirmpasswordwapper: {
         border: "10px solid #eee",
         borderRadius: "10px",
-        marginTop: "-75px",
+        marginTop: "75px",
         height: "auto",
         backgroundColor: '#eee',
         backgroundRepeat: "no-repeat",
