@@ -70,6 +70,7 @@ class UploadDocument extends Component {
   }
 
   uploadDocument = () => {
+	  let me = this;
 	if(this.state.file == "" || this.state.title == "" || this.state.type == "" || this.state.authority == "" ||
 	this.state.market == "" || this.state.source == "" || this.state.decs == "" || this.state.language == "" || this.state.country == ""){
 	  this.setState({
@@ -82,7 +83,7 @@ class UploadDocument extends Component {
 	}
 	var data = new FormData();
 	data.append("documents", this.state.file);
-	data.append("id", this.state.docId);
+	data.append("id", 1);
 	data.append("title", this.state.title);
 	data.append("description", this.state.decs);
 	data.append("type", this.state.type);
@@ -93,13 +94,14 @@ class UploadDocument extends Component {
 	data.append("country", this.state.country);
 	data.append("uploadedBy", sessionstorage.getItem("userId"));
 	data.append("uploadDate", new Date());
-	axios.post("http://52.170.93.166:4000/api/document/upload", data).then(res => {
-	  console.log("http://52.170.93.166:4000/api/document/upload =====> ",res);
+	axios.post("http://localhost:4000/api/document/upload", data).then(res => {
+	  console.log("http://localhost:4000/api/document/upload =====> ",res);
 	  if(res.data.status === "success"){
 		alert(res.data.message);
-		window.location = '/';
+		me.setState({isuploadDocumentDone:true});
 	  }else{
 		alert(res.data.message);
+		me.setState({isuploadDocumentDone:false});
 	  }
 	});
   }
@@ -153,6 +155,7 @@ class UploadDocument extends Component {
 	
   render() {
 	if (!this.getUser()) return <Redirect to={{pathname: "/login"}} />;
+	if (this.state.isuploadDocumentDone) return <Redirect to={{pathname: "/home"}} />;
 	const { classes } = this.props;
     return (
 		<div
