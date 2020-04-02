@@ -15,9 +15,6 @@ const app = express();
  *       - in: formData
  *         name: documents
  *         type: file
- *       - name: id
- *         in: formData
- *         type: integer
  *       - name: title
  *         in: formData
  *         type: string
@@ -47,7 +44,7 @@ const app = express();
  *         type: string
  *       - name: uploadedBy
  *         in: formData
- *         type: integer
+ *         type: string
  *     responses:
  *       ..:
  *         description: ..
